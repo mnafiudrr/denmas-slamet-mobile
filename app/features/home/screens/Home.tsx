@@ -38,7 +38,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
   );
 
   return (
-    <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}
+    <AppView withSafeArea imageBg={require('~/assets/images/bg-home.png')}
     >
       <View style={styles.container}>
         <View style={styles.headerView}>
