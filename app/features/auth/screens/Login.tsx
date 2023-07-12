@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { BackHandler, Alert, View, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { BackHandler, Alert, View, Image, StyleSheet, ScrollView, Dimensions, Pressable } from 'react-native';
 import AppView from '~/app/core/component/AppView';
 import AppText from '~/app/core/component/AppText';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
@@ -66,9 +66,9 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
             {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}
           </View>
         </View>
-        <View style={styles.containerFooter}>
+        <Pressable style={styles.containerFooter} onPress={() => navigation.navigate('Auth/Signup')}>
           <AppText style={styles.footer} bold>Sign Up</AppText>
-        </View>
+        </Pressable>
       </ScrollView>
     </AppView>
   );

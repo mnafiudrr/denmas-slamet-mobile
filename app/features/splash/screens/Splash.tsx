@@ -47,6 +47,7 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
     await Font.loadAsync({
         'roboto': require('~/assets/fonts/roboto/Roboto-Regular.ttf'),
         'roboto_bold': require('~/assets/fonts/roboto/Roboto-Bold.ttf'),
+        'roboto_semibold': require('~/assets/fonts/roboto/Roboto-Medium.ttf'),
     });
     setfontsLoaded(true);
   };

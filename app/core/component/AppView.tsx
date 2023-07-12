@@ -1,6 +1,7 @@
 import React from 'react';
 import {ViewStyle, StatusBar, ImageBackground, ImageSourcePropType} from 'react-native';
 import ToggleableSafeArea from './ToggleSafeArea';
+import PageHeader from './PageHeader';
 
 export default function AppView({
   children, withHeader, title, style, styleHeader,
@@ -20,6 +21,15 @@ export default function AppView({
     return (
       <ToggleableSafeArea active={withSafeArea ?? false} style={{flex: 1, ...style}}>
         <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+        {withHeader ? (
+          <PageHeader
+            withSafeArea
+            title={title}
+            style={styleHeader}
+            suffix={suffixHeader}
+            backButton={backButton}
+          />
+        ) : null}
         {children}
       </ToggleableSafeArea>
     );
@@ -27,6 +37,15 @@ export default function AppView({
     <ImageBackground source={imageBg} style={{flex: 1, ...styleBg}}>
       <ToggleableSafeArea active={withSafeArea ?? false} style={{flex: 1, ...style}}>
         <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+        {withHeader ? (
+          <PageHeader
+            withSafeArea
+            title={title}
+            style={styleHeader}
+            suffix={suffixHeader}
+            backButton={backButton}
+          />
+        ) : null}
           {children}
       </ToggleableSafeArea>
     </ImageBackground>
@@ -34,7 +53,7 @@ export default function AppView({
 }
 
 AppView.defaultProps = {
-  withHeader: true,
+  withHeader: false,
   title: '',
   style: {},
   styleHeader: {},
