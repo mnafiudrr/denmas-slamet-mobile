@@ -62,7 +62,7 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
 
   if (!fontsLoaded) {
     return (
-      <View style={{ flex: 1, backgroundColor: 'blue' }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
       </View>
     )
   }

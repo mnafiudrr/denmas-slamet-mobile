@@ -2,7 +2,6 @@ import { View, Text, Alert, Button, StyleSheet, ScrollView, Image, TouchableOpac
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
-import ScannerScreens from '../../scanner/config/Screens';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'; 
 import { AuthContext } from '~/app/core/config/AuthContext';
 import AppText from '~/app/core/component/AppText';
@@ -50,7 +49,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
           <MaterialIcons name="history" size={24} color="black" />
         </View>
         <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>
-        <AppText style={styles.subTitle}>cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
+        <AppText style={styles.subTitle}>Cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
       </View>
       <View style={styles.bottomContent}>
         <AppButton style={styles.button}>
