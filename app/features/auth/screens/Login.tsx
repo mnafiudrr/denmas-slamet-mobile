@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { BackHandler, Alert, View, Image, StyleSheet, ScrollView, Dimensions, Pressable } from 'react-native';
 import AppView from '~/app/core/component/AppView';
 import AppText from '~/app/core/component/AppText';
@@ -6,6 +6,7 @@ import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/nativ
 import InputForm, { inputHandle } from '~/app/core/component/InputForm';
 import AppButton from '~/app/core/component/AppButton';
 import App from '~/App';
+import { AuthContext } from '~/app/core/config/AuthContext';
 
 
 const heightScreen = Dimensions.get('screen').height;
@@ -34,6 +35,8 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
     }, [])
   );
 
+  const { setIsLoggedIn } = useContext(AuthContext);
+
   const [auth, setAuth] = useState({
     username: '',
     password: '',
@@ -60,7 +63,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
             ref={refPassword} 
             secureTextEntry
             />
-            <AppButton style={styles.button}>
+            <AppButton style={styles.button} onPress={() => setIsLoggedIn(true)}>
               Sign In
             </AppButton>
             {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}

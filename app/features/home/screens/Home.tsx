@@ -1,22 +1,27 @@
 import { View, Text, Alert, Button, StyleSheet, ScrollView, Image, TouchableOpacity, BackHandler } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
 import ScannerScreens from '../../scanner/config/Screens';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons, Ionicons } from '@expo/vector-icons'; 
+import { AuthContext } from '~/app/core/config/AuthContext';
+import AppText from '~/app/core/component/AppText';
+import AppButton from '~/app/core/component/AppButton';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
+  
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
         Alert.alert(
-          "Whyyy",
-          "You sure to exit this app??",
+          "Sign Out",
+          "You sure to Sign Out??",
           [
             {
-              text: "Exit App",
-              onPress: () => BackHandler.exitApp(),
+              text: "Yep",
+              onPress: () => setIsLoggedIn(false),
               style: "default",
             },
           ],
@@ -34,33 +39,24 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
   );
 
   return (
-    <AppView withSafeArea 
-    // style={{ backgroundColor: '#0d0d0d' }}
+    <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}
     >
-      {/* <ScrollView
-        showsVerticalScrollIndicator={false}> */}
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginHorizontal: 15, marginTop: 10 }}>
-        <TouchableOpacity onPress={() => ScannerScreens.HISTORY.navigate(navigation)}>
-          <MaterialIcons name="history" size={28} color="black" />
-        </TouchableOpacity>
-      </View>
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <Text style={styles.topHeaderText}>
-            Scan QR Code
-          </Text>
-          <Text style={styles.topContentText}>
-            To scan your QR can tap on the bottom button.
-            {'\n'}Try it out!
-          </Text>
+          <View style={styles.profile}>
+            <Ionicons name="ios-person-circle" size={24} color="black" />
+            <AppText bold style={styles.topHeaderText}>Joko Widodo</AppText>
+          </View>
+          <MaterialIcons name="history" size={24} color="black" />
         </View>
-        <Image style={styles.logo} source={ require('~/assets/qr-scan.png') }/>
-        <TouchableOpacity style={styles.button} onPress={ () => ScannerScreens.SCANNER.navigate(navigation)}>
-          <Text style={styles.buttonText}>
-            Scan
-          </Text>
-        </TouchableOpacity>
-        {/* </ScrollView> */}
+        <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>
+        <AppText style={styles.subTitle}>cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
+      </View>
+      <View style={styles.bottomContent}>
+        <AppButton style={styles.button}>
+          Cek Kesehatan
+        </AppButton>
+        <Image source={require('~/assets/images/person-home.png')} style={styles.image}/>
       </View>
     </AppView>
   )
@@ -69,41 +65,39 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
   },
   button: {
-    width: 180,
-    height: 40,
-    backgroundColor: '#256FDC',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 15,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: 'white'
+    width: '60%',
+    maxWidth: 250,
+    elevation: 10,
   },
   headerView: {
-    backgroundColor: '#c5c5c5',
-    padding: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: 390,
-    marginBottom: 30
+    flexDirection: 'row',
+    marginBottom: 20,
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  profile: {
+    flexDirection: 'row',
   },
   topHeaderText: {
-    fontSize: 20,
+    fontSize: 18,
+    paddingLeft: 5,
+  },
+  title: {
+    fontSize: 28,
     fontWeight: 'bold',
-    // color: 'white'
   },
-  topContentText: {
-    fontSize: 16,
-    textAlign: 'center',
+  subTitle: {
+    fontSize: 11,
+    color: '#ffffff',
   },
-  logo: {
-    width: 350,
-    height: 350,
-    marginBottom: 50,
+  bottomContent: {
+    alignItems: 'center',
   },
+  image: {
+    width: '100%',
+    marginBottom: '-20%',
+  }
 });
