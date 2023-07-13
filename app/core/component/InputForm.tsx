@@ -1,5 +1,5 @@
 import React, { useImperativeHandle, useRef } from 'react';
-import {View, StyleSheet, StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {View, StyleSheet, StyleProp, TextStyle, ViewStyle, KeyboardTypeOptions} from 'react-native';
 import AppColors from '../static/AppColors';
 import { TextInput } from 'react-native';
 
@@ -12,10 +12,11 @@ type InputFormProps = {
   secureTextEntry?: boolean,
   returnKeyType?: 'next' | 'done' | 'search' | 'go' | 'send' | 'default' | 'emergency-call' | 'google' | 'join' | 'route' | 'yahoo' | undefined,
   ref?: any,
+  keyboardType?: KeyboardTypeOptions,
 }
 
 const InputForm = React.forwardRef<inputHandle, InputFormProps>(({
-  value, placeholder, style, onChangeText, onSubmitEditing, returnKeyType, secureTextEntry
+  value, placeholder, style, onChangeText, onSubmitEditing, returnKeyType, secureTextEntry, keyboardType,
 }, ref) => {
 
   const textInputRef = useRef<TextInput>(null);
@@ -31,6 +32,7 @@ const InputForm = React.forwardRef<inputHandle, InputFormProps>(({
           ref={textInputRef}
           secureTextEntry={secureTextEntry}
           returnKeyType={returnKeyType}
+          keyboardType={keyboardType}
           placeholder={placeholder} 
           value={value} 
           onSubmitEditing={onSubmitEditing}

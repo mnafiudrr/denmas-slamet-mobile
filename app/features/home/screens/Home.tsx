@@ -6,6 +6,7 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '~/app/core/config/AuthContext';
 import AppText from '~/app/core/component/AppText';
 import AppButton from '~/app/core/component/AppButton';
+import HealthyScreen from '../../healthy/config/Screens';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -52,7 +53,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         <AppText style={styles.subTitle}>Cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
       </View>
       <View style={styles.bottomContent}>
-        <AppButton style={styles.button}>
+        <AppButton style={styles.button} onPress={() => HealthyScreen.FORM_PREGNANCY.navigate(navigation)}>
           Cek Kesehatan
         </AppButton>
         <Image source={require('~/assets/images/person-home.png')} style={styles.image}/>

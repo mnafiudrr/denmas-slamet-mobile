@@ -6,12 +6,14 @@ import HomeNavigation from '~/app/features/home/config/Navigation';
 import { SplashContext } from './SplashContext';
 import AuthNavigation from '~/app/features/auth/config/Navigation';
 import { AuthContext } from './AuthContext';
+import HealthyNavigation from '~/app/features/healthy/config/Navigation';
 
 const Root = createStackNavigator();
 
 function listScreen() {
   return [
     ...HomeNavigation.getNavigation(Root),
+    ...HealthyNavigation.getNavigation(Root),
   ];
 }
 
