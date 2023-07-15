@@ -1,5 +1,5 @@
-import { View, Text, Alert, Button, StyleSheet, ScrollView, Image, TouchableOpacity, BackHandler } from 'react-native';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { View, Alert, StyleSheet, Image, BackHandler } from 'react-native';
+import React, { useContext } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'; 

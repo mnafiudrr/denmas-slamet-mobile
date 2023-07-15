@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "denmas-slamet",
+    "name": "Denmas Slamet",
     "slug": "denmas-slamet",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,6 +22,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a94e0204-c0f0-43e0-9e1f-68ced41f9108"
+      }
     }
   }
 }

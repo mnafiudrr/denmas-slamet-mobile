@@ -1,7 +1,6 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import ResultScreen from '../../result/config/Screens';
@@ -9,19 +8,22 @@ import ResultScreen from '../../result/config/Screens';
 export default function History({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
 
   type dataTypes = {
+    id: string,
     name: string,
     date: string,
   }
 
   const [data, setData] = useState<dataTypes[]>([
     {
+      id: '1',
       name: 'Joko Widodo',
       date: '12/12/2020',
     }
   ]);
 
 
-  const toggleNextButton = (): void => {
+  const selectResult = (id: string): void => {
+    ResultScreen.RESULT.navigate(navigation);
   }
 
   return (
@@ -32,7 +34,7 @@ export default function History({ navigation }: { navigation: CompositeNavigatio
             <AppText style={styles.title} bold>Riwayat</AppText>
             {
               data.map((item, index) => (
-                <Pressable key={index} style={styles.warpForm} onPress={() => ResultScreen.RESULT.navigate(navigation)}>
+                <Pressable key={index} style={styles.warpForm} onPress={() => selectResult(item.id)}>
                   <AppText style={styles.label}>Nama</AppText>
                   <AppText style={styles.value} bold>{item.name}</AppText>
                   <AppText style={styles.label}>Tanggal</AppText>

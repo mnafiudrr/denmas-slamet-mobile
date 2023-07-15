@@ -5,7 +5,6 @@ import AppText from '~/app/core/component/AppText';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
 import InputForm, { inputHandle } from '~/app/core/component/InputForm';
 import AppButton from '~/app/core/component/AppButton';
-import App from '~/App';
 import { AuthContext } from '~/app/core/config/AuthContext';
 
 

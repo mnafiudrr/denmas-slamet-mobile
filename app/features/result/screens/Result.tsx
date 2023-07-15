@@ -4,10 +4,6 @@ import { BackHandler, Dimensions, ScrollView, StyleSheet, View } from 'react-nat
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
-import AppYesNo from '~/app/core/component/AppYesNo';
-import InputForm from '~/app/core/component/InputForm';
-import Visible from '~/app/core/component/Visible';
-import { numberOnly } from '~/app/core/utils/formatter';
 import HomeScreen from '../../home/config/Screens';
 
 
@@ -89,7 +85,6 @@ export default function Result({ navigation }: { navigation: CompositeNavigation
   )
 }
 
-const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
