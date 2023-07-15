@@ -8,6 +8,7 @@ import AppYesNo from '~/app/core/component/AppYesNo';
 import InputForm from '~/app/core/component/InputForm';
 import Visible from '~/app/core/component/Visible';
 import { numberOnly } from '~/app/core/utils/formatter';
+import HealthyScreen from '../config/Screens';
 
 
 export default function FormPregnancy({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
@@ -55,6 +56,7 @@ export default function FormPregnancy({ navigation }: { navigation: CompositeNav
 
   const toggleNextButton = (): void => {
     const isValid = validate();
+    if (isValid) HealthyScreen.FORM_HEALTHY.navigate(navigation);
   }
 
   return (
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+    textAlign: 'center',
     marginBottom: 20,
   },
   label: {
@@ -124,6 +127,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+    elevation: 10,
   },
   footer: {
     bottom: 0,

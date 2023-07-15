@@ -7,6 +7,8 @@ import { SplashContext } from './SplashContext';
 import AuthNavigation from '~/app/features/auth/config/Navigation';
 import { AuthContext } from './AuthContext';
 import HealthyNavigation from '~/app/features/healthy/config/Navigation';
+import ResultNavigation from '~/app/features/result/config/Navigation';
+import HistoryNavigation from '~/app/features/history/config/Navigation';
 
 const Root = createStackNavigator();
 
@@ -14,6 +16,8 @@ function listScreen() {
   return [
     ...HomeNavigation.getNavigation(Root),
     ...HealthyNavigation.getNavigation(Root),
+    ...ResultNavigation.getNavigation(Root),
+    ...HistoryNavigation.getNavigation(Root),
   ];
 }
 

@@ -7,6 +7,7 @@ import { AuthContext } from '~/app/core/config/AuthContext';
 import AppText from '~/app/core/component/AppText';
 import AppButton from '~/app/core/component/AppButton';
 import HealthyScreen from '../../healthy/config/Screens';
+import HistoryScreen from '../../history/config/Screens';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -47,7 +48,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
             <Ionicons name="ios-person-circle" size={24} color="black" />
             <AppText bold style={styles.topHeaderText}>Joko Widodo</AppText>
           </View>
-          <MaterialIcons name="history" size={24} color="black" />
+          <MaterialIcons name="history" size={24} color="black" onPress={() => HistoryScreen.HISTORY.navigate(navigation)} />
         </View>
         <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>
         <AppText style={styles.subTitle}>Cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>

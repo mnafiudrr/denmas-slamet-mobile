@@ -1,18 +1,19 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import AppText from './AppText';
 import { StyleSheet } from 'react-native';
 
 type AppButtonProps = {
   children?: React.ReactNode,
   onPress?: () => void,
-  style?: any,
+  style?: StyleProp<ViewStyle>,
+  textStyle?: StyleProp<TextStyle>,
 }
 
-export default function AppButton({children, onPress, style}: AppButtonProps) {
+export default function AppButton({children, onPress, style, textStyle}: AppButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-      <AppText bold style={styles.text}>
+      <AppText bold style={[styles.text, textStyle]}>
         {children}
       </AppText>
     </TouchableOpacity>
