@@ -1,47 +1,108 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useContext, useRef, useState } from 'react';
+import { Alert, Dimensions, Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
-import InputForm from '~/app/core/component/InputForm';
-import { numberOnly } from '~/app/core/utils/formatter';
+import InputForm, { inputHandle } from '~/app/core/component/InputForm';
+import { formatDate, numberOnly } from '~/app/core/utils/formatter';
 import ResultScreen from '../../result/config/Screens';
+import axios from 'axios';
+import { AuthContext } from '~/app/core/config/AuthContext';
+import { showLoading } from '~/app/core/utils/loader';
+import { REPORT_PATH } from '~/app/service/ApiServices';
 
+type Props = {
+  route: any,
+}
 
-export default function FormHealthy({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
+export default function FormHealthy({ navigation, route }: { navigation: CompositeNavigationProp<any, any> } & Props) {
+
+  const { pregnancy } = route.params;
+  const { userData } = useContext(AuthContext);
+  const refTinggiBadan = useRef<inputHandle>(null);
+  const refBeratBadan = useRef<inputHandle>(null);
+  const refTekananDarahSistol = useRef<inputHandle>(null);
+  const refTekananDarahDiastol = useRef<inputHandle>(null);
+  const refKadarGula = useRef<inputHandle>(null);
+  const refKadarHb = useRef<inputHandle>(null);
+  const refKadarKolesterol = useRef<inputHandle>(null);
+  const refKadarAsamUrat = useRef<inputHandle>(null);
 
   type dataTypes = {
-    height?: string;
-    weight?: string;
-    bloodPressure?: string;
-    bloodSugar?: string;
-    hB?: string;
-    colesterol?: string;
-    gout?: string;
+    tinggi_badan?: string;
+    berat_badan?: string;
+    tekanan_darah_sistol?: string;
+    tekanan_darah_diastol?: string;
+    kadar_gula?: string;
+    kadar_hb?: string;
+    kadar_kolesterol?: string;
+    kadar_asam_urat?: string;
   }
 
-  const [data, setData] = useState<dataTypes>({
-  });
+  const [data, setData] = useState<dataTypes>({});
 
   const validate = (): boolean => {
     const requiredFields = [
-      data.height,
-      data.weight,
-      data.bloodPressure,
-      data.bloodSugar,
-      data.hB,
-      data.colesterol,
-      data.gout,
+      data.tinggi_badan,
+      data.berat_badan,
+      data.tekanan_darah_sistol,
+      data.tekanan_darah_diastol,
+      data.kadar_gula,
+      data.kadar_hb,
+      data.kadar_kolesterol,
+      data.kadar_asam_urat,
     ];
     if (requiredFields.some(field => field === undefined || field === '')) return false;
     return true;
   };
 
-  const toggleNextButton = (): void => {
-    ResultScreen.RESULT.navigate(navigation)
-    // const isValid = validate();
-    // if (isValid) ResultScreen.RESULT.navigate(navigation);
+  const toggleNextButton = async () => {
+    // ResultScreen.RESULT.navigate(navigation)
+    const isValid = validate();
+    if (!isValid) return Alert.alert('Peringatan', 'Mohon lengkapi data terlebih dahulu');
+
+    const request_data = {
+      ...pregnancy,
+      ...data,
+    }
+
+    showLoading(true);
+    try {
+      const promise = await axios({
+        method: 'post',
+        url: REPORT_PATH,
+        timeout: 15000,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userData.token}`,
+        },
+        data: request_data,
+      });
+
+      const response = promise.data.data;
+
+      const result_res = response.result;
+      const health_res = response.health;
+
+      const result = {
+        id: response.id,
+        name: response.profile.fullname,
+        date: formatDate(response.created_at),
+        imt: `${result_res.imt} (${result_res.status_imt})`,
+        tekanan_darah: `${health_res.tekanan_darah_sistol}/${health_res.tekanan_darah_diastol} (${result_res.status_tekanan_darah})`,
+        gula_darah: `${health_res.kadar_gula} (${result_res.status_gula})`,
+        hb: `${health_res.kadar_hb} (${result_res.status_hb})`,
+        kolesterol: `${health_res.kadar_kolesterol} (${result_res.status_kolesterol})`,
+        asam_urat: `${health_res.kadar_asam_urat} (${result_res.status_asam_urat})`,
+      }
+
+      ResultScreen.RESULT.navigate(navigation, { data: result });
+        
+    } catch (error) {
+      console.log('error', error);
+    }
+    showLoading(false);
   }
 
   return (
@@ -53,59 +114,94 @@ export default function FormHealthy({ navigation }: { navigation: CompositeNavig
             <View style={styles.warpForm}>
               <AppText style={styles.label}>Tinggi Badan (cm)</AppText>
               <InputForm
+                onSubmitEditing={() => refBeratBadan.current?.onFocus()}
+                returnKeyType="next"
                 style={styles.form}
                 placeholder='Tinggi Badan'
                 keyboardType='numeric'
-                value={data.height}
-                onChangeText={(text: string) => setData({ ...data, height: numberOnly(text) })}
+                value={data.tinggi_badan}
+                onChangeText={(text: string) => setData({ ...data, tinggi_badan: numberOnly(text) })}
               />
               <AppText style={styles.label}>Berat Badan (kg)</AppText>
               <InputForm
+                ref={refBeratBadan}
+                onSubmitEditing={() => refTekananDarahSistol.current?.onFocus()}
+                returnKeyType="next"
                 style={styles.form}
                 placeholder='Berat Badan'
                 keyboardType='numeric'
-                value={data.weight}
-                onChangeText={(text: string) => setData({ ...data, weight: numberOnly(text) })}
+                value={data.berat_badan}
+                onChangeText={(text: string) => setData({ ...data, berat_badan: numberOnly(text) })}
               />
               <AppText style={styles.label}>Tekanan Darah (mmHg)</AppText>
-              <InputForm
-                style={styles.form}
-                placeholder='Tekanan Darah'
-                keyboardType='numeric'
-                value={data.bloodPressure}
-                onChangeText={(text: string) => setData({ ...data, bloodPressure: numberOnly(text) })}
-              />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <InputForm
+                  ref={refTekananDarahSistol}
+                  onSubmitEditing={() => refTekananDarahDiastol.current?.onFocus()}
+                  returnKeyType="next"
+                  style={[styles.form, { width: '47%'}]}
+                  placeholder='Sistol'
+                  keyboardType='numeric'
+                  value={data.tekanan_darah_sistol}
+                  onChangeText={(text: string) => setData({ ...data, tekanan_darah_sistol: numberOnly(text) })}
+                />
+                <AppText style={{ alignSelf: 'center', fontSize: 40, marginTop: -15 }}>/</AppText>
+                <InputForm
+                  ref={refTekananDarahDiastol}
+                  onSubmitEditing={() => refKadarGula.current?.onFocus()}
+                  returnKeyType="next"
+                  style={[styles.form, { width: '47%'}]}
+                  placeholder='Diastol'
+                  keyboardType='numeric'
+                  value={data.tekanan_darah_diastol}
+                  onChangeText={(text: string) => setData({ ...data, tekanan_darah_diastol: numberOnly(text) })}
+                />
+              </View>
               <AppText style={styles.label}>Kadar Gula Darah (mg/dL)</AppText>
               <InputForm
+                ref={refKadarGula}
+                onSubmitEditing={() => refKadarHb.current?.onFocus()}
+                returnKeyType="next"
                 style={styles.form}
                 placeholder='Gula Darah'
                 keyboardType='numeric'
-                value={data.bloodSugar}
-                onChangeText={(text: string) => setData({ ...data, bloodSugar: numberOnly(text) })}
+                value={data.kadar_gula}
+                onChangeText={(text: string) => setData({ ...data, kadar_gula: numberOnly(text) })}
               />
               <AppText style={styles.label}>Kadar HB (g/dL)</AppText>
               <InputForm
+                ref={refKadarHb}
+                onSubmitEditing={() => refKadarKolesterol.current?.onFocus()}
+                returnKeyType="next"
                 style={styles.form}
                 placeholder='HB'
                 keyboardType='numeric'
-                value={data.hB}
-                onChangeText={(text: string) => setData({ ...data, hB: numberOnly(text) })}
+                value={data.kadar_hb}
+                onChangeText={(text: string) => setData({ ...data, kadar_hb: numberOnly(text) })}
               />
               <AppText style={styles.label}>Kadar Kolesterol (mg/dL)</AppText>
               <InputForm
+                ref={refKadarKolesterol}
+                onSubmitEditing={() => refKadarAsamUrat.current?.onFocus()}
+                returnKeyType="next"
                 style={styles.form}
                 placeholder='Kolesterol'
                 keyboardType='numeric'
-                value={data.colesterol}
-                onChangeText={(text: string) => setData({ ...data, colesterol: numberOnly(text) })}
+                value={data.kadar_kolesterol}
+                onChangeText={(text: string) => setData({ ...data, kadar_kolesterol: numberOnly(text) })}
               />
               <AppText style={styles.label}>Kadar Asam Urat</AppText>
               <InputForm
+                ref={refKadarAsamUrat}
+                onSubmitEditing={() => {
+                  Keyboard.dismiss();
+                  toggleNextButton();
+                }}
                 style={styles.form}
                 placeholder='Asam Urat'
                 keyboardType='numeric'
-                value={data.gout}
-                onChangeText={(text: string) => setData({ ...data, gout: numberOnly(text) })}
+                value={data.kadar_asam_urat}
+                onChangeText={(text: string) => setData({ ...data, kadar_asam_urat: numberOnly(text) })}
               />
             </View>
             <AppButton style={styles.button} onPress={toggleNextButton}>

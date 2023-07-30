@@ -10,7 +10,13 @@ import { REPORT_PATH } from '~/app/service/ApiServices';
 import { AuthContext } from '~/app/core/config/AuthContext';
 import { formatDate } from '~/app/core/utils/formatter';
 
-export default function History({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
+type Props = {
+  route: any,
+}
+
+export default function History({ navigation, route }: { navigation: CompositeNavigationProp<any, any> } & Props) {
+
+  const { profile_id } = route.params;
 
   type dataTypes = {
     id: string,
@@ -30,7 +36,7 @@ export default function History({ navigation }: { navigation: CompositeNavigatio
     try {
       const promise = await axios({
         method: 'get',
-        url: REPORT_PATH,
+        url: `${REPORT_PATH}?profile_id=${profile_id}`,
         timeout: 15000,
         headers: {
           Authorization: `Bearer ${userData.token}`,

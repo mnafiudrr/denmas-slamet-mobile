@@ -43,6 +43,8 @@ function RootNavigation() {
     token: '',
     name: '',
     is_admin: false,
+    profile_id: '',
+    fullname: '',
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

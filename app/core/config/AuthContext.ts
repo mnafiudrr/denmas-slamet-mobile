@@ -8,6 +8,8 @@ const AuthCtxDefaultValue = {
     token: '',
     name: '',
     is_admin: false,
+    profile_id: '',
+    fullname: '',
   },
   setUserData: (userData: {
     id: string,
@@ -16,6 +18,8 @@ const AuthCtxDefaultValue = {
     token: string,
     name: string,
     is_admin: boolean,
+    profile_id: string,
+    fullname: string,
   }) => {},
   isLoggedIn: false,
   setIsLoggedIn: (boolean: boolean) => {},

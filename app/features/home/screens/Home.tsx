@@ -62,6 +62,24 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
     setIsLoggedIn(false);
   }
 
+  const toggleCekKesehatan = () => {
+    if (!userData.is_admin)
+      return HealthyScreen.FORM_PREGNANCY.navigate(navigation, { profile_id: userData.profile_id });
+    return Alert.alert(
+      "Admin Alert",
+      "Fitur belum tersedia untuk admin",
+    );
+  }
+
+  const toggleRiwayat = () => {
+    if (!userData.is_admin)
+      return HistoryScreen.HISTORY.navigate(navigation, { profile_id: userData.profile_id });
+    return Alert.alert(
+      "Admin Alert",
+      "Fitur belum tersedia untuk admin",
+    );
+  }
+
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-home.png')}
     >
@@ -71,13 +89,13 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
             <Ionicons name="ios-person-circle" size={24} color="black" />
             <AppText bold style={styles.topHeaderText}>{userData.name}</AppText>
           </View>
-          <MaterialIcons name="history" size={24} color="black" onPress={() => HistoryScreen.HISTORY.navigate(navigation)} />
+          <MaterialIcons name="history" size={24} color="black" onPress={toggleRiwayat} />
         </View>
         <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>
         <AppText style={styles.subTitle}>Cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
       </View>
       <View style={styles.bottomContent}>
-        <AppButton style={styles.button} onPress={() => HealthyScreen.FORM_PREGNANCY.navigate(navigation)}>
+        <AppButton style={styles.button} onPress={toggleCekKesehatan}>
           Cek Kesehatan
         </AppButton>
         <Image source={require('~/assets/images/person-home.png')} style={styles.image}/>
