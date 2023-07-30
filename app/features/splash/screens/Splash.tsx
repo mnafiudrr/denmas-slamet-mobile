@@ -9,6 +9,9 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import AppView from '~/app/core/component/AppView';
 import { SplashContext } from '~/app/core/config/SplashContext';
 import AppText from '~/app/core/component/AppText';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GET_USER_PROFILE_PATH } from '~/app/service/ApiServices';
+import { AuthContext } from '~/app/core/config/AuthContext';
 
 const heightScreen = Dimensions.get('screen').height;
 
@@ -40,6 +43,7 @@ const styles = StyleSheet.create({
 export default function Splash({navigation}: {navigation: CompositeNavigationProp<any, any>}) {
 
   const { setSplashLoading } = useContext(SplashContext);
+  const { setIsLoggedIn, setUserData} = useContext(AuthContext);
 
   const [fontsLoaded, setfontsLoaded] = useState(false);
 
@@ -55,10 +59,33 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
   useEffect(() => {
     _loadFontAsync();
     setTimeout(() => {
-      setSplashLoading(false);
+      checkToken();
     }, 3000);
   }, []);
   
+  const checkToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        const promise = await axios({
+          method: 'get',
+          url: GET_USER_PROFILE_PATH,
+          timeout: 15000,
+          headers: {
+            Authorization: `Bearer ${value}`,
+            Accept: 'application/json',
+          },
+        });
+        if (promise.data.user) {
+          setUserData({...promise.data.user, token : value});
+          setIsLoggedIn(true);
+        }
+      }
+      setSplashLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   if (!fontsLoaded) {
     return (

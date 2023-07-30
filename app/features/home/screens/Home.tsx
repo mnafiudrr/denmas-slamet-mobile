@@ -8,10 +8,14 @@ import AppText from '~/app/core/component/AppText';
 import AppButton from '~/app/core/component/AppButton';
 import HealthyScreen from '../../healthy/config/Screens';
 import HistoryScreen from '../../history/config/Screens';
+import { LOGOUT_PATH } from '~/app/service/ApiServices';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { showLoading } from '~/app/core/utils/loader';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, userData } = useContext(AuthContext);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -22,7 +26,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
           [
             {
               text: "Yep",
-              onPress: () => setIsLoggedIn(false),
+              onPress: requestLogout,
               style: "default",
             },
           ],
@@ -39,6 +43,25 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
     }, [])
   );
 
+  const requestLogout = async () => {
+    showLoading(true);
+    try {
+      const promise = await axios({
+        method: 'post',
+        url: LOGOUT_PATH,
+        timeout: 15000,
+        headers: {
+          'Authorization': `Bearer ${userData.token}`
+        }
+      });
+    } catch (error) {
+    }
+      
+    AsyncStorage.removeItem('token');
+    showLoading(false);
+    setIsLoggedIn(false);
+  }
+
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-home.png')}
     >
@@ -46,7 +69,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         <View style={styles.headerView}>
           <View style={styles.profile}>
             <Ionicons name="ios-person-circle" size={24} color="black" />
-            <AppText bold style={styles.topHeaderText}>Joko Widodo</AppText>
+            <AppText bold style={styles.topHeaderText}>{userData.name}</AppText>
           </View>
           <MaterialIcons name="history" size={24} color="black" onPress={() => HistoryScreen.HISTORY.navigate(navigation)} />
         </View>

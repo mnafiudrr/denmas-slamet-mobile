@@ -77,8 +77,8 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: heightScreen-20,
+    // flex: 1,
+    // height: heightScreen-20,
   },
   formBox: {
     width: '100%',

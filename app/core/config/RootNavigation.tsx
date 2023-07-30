@@ -41,6 +41,8 @@ function RootNavigation() {
     phone: '',
     username: '',
     token: '',
+    name: '',
+    is_admin: false,
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

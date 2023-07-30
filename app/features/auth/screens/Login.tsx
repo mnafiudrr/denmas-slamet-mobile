@@ -6,6 +6,10 @@ import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/nativ
 import InputForm, { inputHandle } from '~/app/core/component/InputForm';
 import AppButton from '~/app/core/component/AppButton';
 import { AuthContext } from '~/app/core/config/AuthContext';
+import axios from 'axios';
+import { LOGIN_PATH } from '~/app/service/ApiServices';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { showLoading } from '~/app/core/utils/loader';
 
 
 const heightScreen = Dimensions.get('screen').height;
@@ -34,13 +38,43 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
     }, [])
   );
 
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, setUserData } = useContext(AuthContext);
 
   const [auth, setAuth] = useState({
     username: '',
     password: '',
   });
   const refPassword = useRef<inputHandle>(null);
+
+  const toggleLogin = async () => {
+    showLoading(true);
+    try {
+      const promise = await axios({
+        method: 'post',
+        url: LOGIN_PATH,
+        timeout: 15000,
+        data: {
+          username: auth.username,
+          password: auth.password,
+        }
+      });
+
+      const response = promise.data;
+
+      if (response.message === 'Login successful') {
+
+        await AsyncStorage.setItem('token', response.token);
+
+        setUserData({...response.user, token: response.token});
+        showLoading(false);
+        setIsLoggedIn(true);
+      }
+      
+    } catch (error) {
+      showLoading(false);
+      Alert.alert('Error', 'Username or Password is incorrect');
+    }
+  }
 
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}>
@@ -62,7 +96,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
             ref={refPassword} 
             secureTextEntry
             />
-            <AppButton style={styles.button} onPress={() => setIsLoggedIn(true)}>
+            <AppButton style={styles.button} onPress={toggleLogin}>
               Sign In
             </AppButton>
             {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}

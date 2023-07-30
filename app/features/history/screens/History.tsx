@@ -1,9 +1,14 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import ResultScreen from '../../result/config/Screens';
+import { showLoading } from '~/app/core/utils/loader';
+import axios from 'axios';
+import { REPORT_PATH } from '~/app/service/ApiServices';
+import { AuthContext } from '~/app/core/config/AuthContext';
+import { formatDate } from '~/app/core/utils/formatter';
 
 export default function History({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
 
@@ -13,17 +18,82 @@ export default function History({ navigation }: { navigation: CompositeNavigatio
     date: string,
   }
 
-  const [data, setData] = useState<dataTypes[]>([
-    {
-      id: '1',
-      name: 'Joko Widodo',
-      date: '12/12/2020',
+  const [data, setData] = useState<dataTypes[]>([]);
+  const { userData } = useContext(AuthContext);
+
+  useEffect(() => {
+    getRiwayat();
+  },[]);
+
+  const getRiwayat = async() => {
+    showLoading(true);
+    try {
+      const promise = await axios({
+        method: 'get',
+        url: REPORT_PATH,
+        timeout: 15000,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+          Accept: 'application/json',
+        },
+      });
+      
+      const response = promise.data.data.map((item: any) => {
+        return { 
+          id: item.id,
+          name: item.name,
+          date: formatDate(item.created_at) 
+        };
+      });
+
+      setData(response);
+      
+    } catch (error) {
+      
     }
-  ]);
+    showLoading(false);
+  }
 
+  const selectResult = async (id: string) => {
 
-  const selectResult = (id: string): void => {
-    ResultScreen.RESULT.navigate(navigation);
+    showLoading(true);
+
+    try {
+
+      const promise = await axios({
+        method: 'get',
+        url: `${REPORT_PATH}/${id}`,
+        timeout: 15000,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      const response = promise.data.data;
+
+      const result_res = response.result;
+      const health_res = response.health;
+
+      const result = {
+        id: response.id,
+        name: response.profile.fullname,
+        date: formatDate(response.created_at),
+        imt: `${result_res.imt} (${result_res.status_imt})`,
+        tekanan_darah: `${health_res.tekanan_darah_sistol}/${health_res.tekanan_darah_diastol} (${result_res.status_tekanan_darah})`,
+        gula_darah: `${health_res.kadar_gula} (${result_res.status_gula})`,
+        hb: `${health_res.kadar_hb} (${result_res.status_hb})`,
+        kolesterol: `${health_res.kadar_kolesterol} (${result_res.status_kolesterol})`,
+        asam_urat: `${health_res.kadar_asam_urat} (${result_res.status_asam_urat})`,
+      }
+
+      ResultScreen.RESULT.navigate(navigation, { data: result });
+    } catch (error) {
+      
+    }
+
+    showLoading(false);
+
   }
 
   return (

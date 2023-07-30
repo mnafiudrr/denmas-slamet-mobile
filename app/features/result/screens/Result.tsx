@@ -1,4 +1,4 @@
-import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
+import { CompositeNavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { BackHandler, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
@@ -6,8 +6,14 @@ import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import HomeScreen from '../../home/config/Screens';
 
+type RouteProps = {
+  route: any
+}
 
-export default function Result({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
+export default function Result({ route }: RouteProps) {
+
+  const { data } = route.params;
+  const navigation = useNavigation<CompositeNavigationProp<any, any>>();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -21,29 +27,6 @@ export default function Result({ navigation }: { navigation: CompositeNavigation
       return () => subscription.remove();
     }, [])
   );
-  
-  type dataTypes = {
-    name?: string,
-    date?: string,
-    imt?: string,
-    bloodPressure?: string;
-    bloodSugar?: string;
-    hB?: string;
-    colesterol?: string;
-    gout?: string;
-  }
-
-  const [data, setData] = useState<dataTypes>({
-    name: 'Joko Widodo',
-    date: '03-07-2023',
-    imt: 'Kurus',
-    bloodPressure: 'Normal',
-    bloodSugar: 'Normal',
-    hB: 'Normal',
-    colesterol: 'Normal',
-    gout: 'Normal',
-  });
-
 
   const toggleNextButton = (): void => {
     const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2].name;
@@ -65,15 +48,15 @@ export default function Result({ navigation }: { navigation: CompositeNavigation
               <AppText style={styles.label}>IMT</AppText>
               <AppText style={styles.value} bold>{data.imt}</AppText>
               <AppText style={styles.label}>Tekanan Darah</AppText>
-              <AppText style={styles.value} bold>{data.bloodPressure}</AppText>
+              <AppText style={styles.value} bold>{data.tekanan_darah}</AppText>
               <AppText style={styles.label}>Gula Darah</AppText>
-              <AppText style={styles.value} bold>{data.bloodSugar}</AppText>
+              <AppText style={styles.value} bold>{data.gula_darah}</AppText>
               <AppText style={styles.label}>HB</AppText>
-              <AppText style={styles.value} bold>{data.hB}</AppText>
+              <AppText style={styles.value} bold>{data.hb}</AppText>
               <AppText style={styles.label}>Kolesterol</AppText>
-              <AppText style={styles.value} bold>{data.colesterol}</AppText>
+              <AppText style={styles.value} bold>{data.kolesterol}</AppText>
               <AppText style={styles.label}>Asam Urat</AppText>
-              <AppText style={styles.value} bold>{data.gout}</AppText>
+              <AppText style={styles.value} bold>{data.asam_urat}</AppText>
             </View>
             <AppButton style={styles.button} textStyle={styles.buttonText} onPress={toggleNextButton}>
               OK

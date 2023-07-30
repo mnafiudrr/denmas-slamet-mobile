@@ -1,7 +1,13 @@
-export const IP_SERVER = `http://13.229.205.212:8080/api/new/`;
+export const IP_SERVER = `http://103.163.161.18:9876/api`;
 
+export const AUTH_PATH = `${IP_SERVER}/auth`;
+export const USER_PATH = `${IP_SERVER}/user`;
+export const REPORT_PATH = `${IP_SERVER}/report`;
 
-export const URL_SPLASH = `${IP_SERVER}master/app-logo`;
-export const URL_MASTER_APP_VIDEO = `${IP_SERVER}master/dashboard-video`;
+export const LOGIN_PATH = `${AUTH_PATH}/login`;
+export const REGISTER_PATH = `${AUTH_PATH}/register`;
+export const LOGOUT_PATH = `${AUTH_PATH}/logout`;
 
-export const URL_MATERI = `${IP_SERVER}materi`;
+export const GET_USER_PROFILE_PATH = `${USER_PATH}/profile`;
+
+export const GET_ALL_REPORT_PATH = `${REPORT_PATH}`;
