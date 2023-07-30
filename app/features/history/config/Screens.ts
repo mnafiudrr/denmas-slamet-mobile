@@ -5,6 +5,10 @@ const HistoryScreen = {
     KEY: 'History/History',
     TITLE: 'History',
   }),
+  LIST_USER: new ScreenData<any>({
+    KEY: 'History/ListUser',
+    TITLE: 'List User',
+  }),
 };
 
 export default HistoryScreen;

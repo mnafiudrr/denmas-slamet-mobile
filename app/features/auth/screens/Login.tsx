@@ -92,10 +92,15 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
               onChangeText={(value) => setAuth({...auth, username: value})} 
               style={styles.form}/>
             <AppText style={styles.label}>Password</AppText>
-            <InputForm placeholder="Password" value={auth.password} onChangeText={(value) => setAuth({...auth, password: value})} style={styles.form} 
-            ref={refPassword} 
-            secureTextEntry
-            />
+            <InputForm 
+              placeholder="Password" 
+              onSubmitEditing={toggleLogin}
+              value={auth.password} 
+              onChangeText={(value) => setAuth({...auth, password: value})} 
+                style={styles.form} 
+              ref={refPassword} 
+              secureTextEntry
+              />
             <AppButton style={styles.button} onPress={toggleLogin}>
               Sign In
             </AppButton>

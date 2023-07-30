@@ -3,6 +3,7 @@ export const IP_SERVER = `http://103.163.161.18:9876/api`;
 export const AUTH_PATH = `${IP_SERVER}/auth`;
 export const USER_PATH = `${IP_SERVER}/user`;
 export const REPORT_PATH = `${IP_SERVER}/report`;
+export const PROFILE_PATH = `${IP_SERVER}/profile`;
 
 export const LOGIN_PATH = `${AUTH_PATH}/login`;
 export const REGISTER_PATH = `${AUTH_PATH}/register`;

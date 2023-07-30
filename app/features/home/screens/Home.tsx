@@ -65,19 +65,13 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
   const toggleCekKesehatan = () => {
     if (!userData.is_admin)
       return HealthyScreen.FORM_PREGNANCY.navigate(navigation, { profile_id: userData.profile_id });
-    return Alert.alert(
-      "Admin Alert",
-      "Fitur belum tersedia untuk admin",
-    );
+    return HistoryScreen.LIST_USER.navigate(navigation, { access_type: 'healthy'});
   }
 
   const toggleRiwayat = () => {
     if (!userData.is_admin)
       return HistoryScreen.HISTORY.navigate(navigation, { profile_id: userData.profile_id });
-    return Alert.alert(
-      "Admin Alert",
-      "Fitur belum tersedia untuk admin",
-    );
+    return HistoryScreen.LIST_USER.navigate(navigation, { access_type: 'history'});
   }
 
   return (
