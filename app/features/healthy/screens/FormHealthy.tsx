@@ -201,7 +201,7 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                 placeholder='Asam Urat'
                 keyboardType='numeric'
                 value={data.kadar_asam_urat}
-                onChangeText={(text: string) => setData({ ...data, kadar_asam_urat: numberOnly(text) })}
+                onChangeText={(text: string) => setData({ ...data, kadar_asam_urat: numberOnly(text, 1) })}
               />
             </View>
             <AppButton style={styles.button} onPress={toggleNextButton}>

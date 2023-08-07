@@ -1,4 +1,4 @@
-import { View, Alert, StyleSheet, Image, BackHandler } from 'react-native';
+import { View, Alert, StyleSheet, Image, BackHandler, Pressable } from 'react-native';
 import React, { useContext } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import { LOGOUT_PATH } from '~/app/service/ApiServices';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showLoading } from '~/app/core/utils/loader';
+import ProfileScreen from '../../profile/config/Screens';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -79,10 +80,10 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
     >
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <View style={styles.profile}>
+          <Pressable style={styles.profile} onPress={() => ProfileScreen.PROFILE.navigate(navigation)}>
             <Ionicons name="ios-person-circle" size={24} color="black" />
             <AppText bold style={styles.topHeaderText}>{userData.name}</AppText>
-          </View>
+          </Pressable>
           <MaterialIcons name="history" size={24} color="black" onPress={toggleRiwayat} />
         </View>
         <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>

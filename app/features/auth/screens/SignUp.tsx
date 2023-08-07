@@ -94,6 +94,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
               placeholder="No HP" 
               onSubmitEditing={() => refUsername.current?.onFocus()}
               returnKeyType="next"
+              keyboardType='numeric'
               value={data.phone} 
               onChangeText={(value) => setData({...data, phone: value})} 
               style={styles.form}/>

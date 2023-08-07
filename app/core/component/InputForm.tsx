@@ -13,10 +13,11 @@ type InputFormProps = {
   returnKeyType?: 'next' | 'done' | 'search' | 'go' | 'send' | 'default' | 'emergency-call' | 'google' | 'join' | 'route' | 'yahoo' | undefined,
   ref?: any,
   keyboardType?: KeyboardTypeOptions,
+  readonly?: boolean,
 }
 
 const InputForm = React.forwardRef<inputHandle, InputFormProps>(({
-  value, placeholder, style, onChangeText, onSubmitEditing, returnKeyType, secureTextEntry, keyboardType,
+  value, placeholder, style, onChangeText, onSubmitEditing, returnKeyType, secureTextEntry, keyboardType, readonly = false
 }, ref) => {
 
   const textInputRef = useRef<TextInput>(null);
@@ -29,6 +30,8 @@ const InputForm = React.forwardRef<inputHandle, InputFormProps>(({
     <View style={[styles.container, style]}>
       <View style={styles.inputContainer}>
         <TextInput 
+          style={{color: AppColors.fullblack}}
+          editable={!readonly}
           ref={textInputRef}
           secureTextEntry={secureTextEntry}
           returnKeyType={returnKeyType}

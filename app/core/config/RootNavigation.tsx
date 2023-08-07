@@ -9,6 +9,7 @@ import { AuthContext } from './AuthContext';
 import HealthyNavigation from '~/app/features/healthy/config/Navigation';
 import ResultNavigation from '~/app/features/result/config/Navigation';
 import HistoryNavigation from '~/app/features/history/config/Navigation';
+import ProfileNavigation from '~/app/features/profile/config/Navigation';
 
 const Root = createStackNavigator();
 
@@ -18,6 +19,7 @@ function listScreen() {
     ...HealthyNavigation.getNavigation(Root),
     ...ResultNavigation.getNavigation(Root),
     ...HistoryNavigation.getNavigation(Root),
+    ...ProfileNavigation.getNavigation(Root),
   ];
 }
 
