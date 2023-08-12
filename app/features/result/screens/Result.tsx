@@ -1,10 +1,11 @@
 import { CompositeNavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { BackHandler, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, BackHandler, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import HomeScreen from '../../home/config/Screens';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 type RouteProps = {
   route: any
@@ -34,6 +35,23 @@ export default function Result({ route }: RouteProps) {
     return HomeScreen.HOME.navigate(navigation);
   }
 
+  const showInformation = (type: string): void => {
+    const information = data.statuses.find((item: any) => item.type === type);
+    
+    Alert.alert(
+      'Informasi Kesehatan',
+      `Status ${processString(type)} anda ${information.name}. ${information.description}.`
+    );
+  }
+
+  function processString(input: string) {
+    if (input.length === 3) {
+      return input.toUpperCase();
+    } else {
+      return input.replace(/_/g, ' ');
+    }
+  }
+
   return (
     <AppView withSafeArea>
       <ScrollView>
@@ -46,17 +64,35 @@ export default function Result({ route }: RouteProps) {
               <AppText style={styles.label}>Tanggal</AppText>
               <AppText style={styles.value} bold>{data.date}</AppText>
               <AppText style={styles.label}>IMT</AppText>
-              <AppText style={styles.value} bold>{data.imt}</AppText>
+              <AppText style={styles.value} bold>
+                {data.imt}{` `}
+                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('imt')} />
+              </AppText>
               <AppText style={styles.label}>Tekanan Darah</AppText>
-              <AppText style={styles.value} bold>{data.tekanan_darah}</AppText>
+              <AppText style={styles.value} bold>
+                {data.tekanan_darah}{` `}
+                <FontAwesome5 name="question-circle" size={15} style={styles.questionIcon} onPress={() => showInformation('tekanan_darah')} />
+              </AppText>
               <AppText style={styles.label}>Gula Darah</AppText>
-              <AppText style={styles.value} bold>{data.gula_darah}</AppText>
+              <AppText style={styles.value} bold>
+                {data.gula_darah}{` `}
+                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('gula')} />
+              </AppText>
               <AppText style={styles.label}>HB</AppText>
-              <AppText style={styles.value} bold>{data.hb}</AppText>
+              <AppText style={styles.value} bold>
+                {data.hb}{` `}
+                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('hb')} />
+              </AppText>
               <AppText style={styles.label}>Kolesterol</AppText>
-              <AppText style={styles.value} bold>{data.kolesterol}</AppText>
+              <AppText style={styles.value} bold>
+                {data.kolesterol}{` `}
+                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('kolesterol')} />
+              </AppText>
               <AppText style={styles.label}>Asam Urat</AppText>
-              <AppText style={styles.value} bold>{data.asam_urat}</AppText>
+              <AppText style={styles.value} bold>
+                {data.asam_urat}{` `}
+                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('asam_urat')} />
+              </AppText>
             </View>
             <AppButton style={styles.button} textStyle={styles.buttonText} onPress={toggleNextButton}>
               OK
@@ -90,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
-    shadowOpacity:  0.1,
+    shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 10,
   },
@@ -108,6 +144,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   buttonText: {
+    color: '#29B6F6',
+  },
+  questionIcon: {
     color: '#29B6F6',
   }
 });

@@ -95,6 +95,7 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
         hb: `${health_res.kadar_hb} (${result_res.status_hb})`,
         kolesterol: `${health_res.kadar_kolesterol} (${result_res.status_kolesterol})`,
         asam_urat: `${health_res.kadar_asam_urat} (${result_res.status_asam_urat})`,
+        statuses: result_res.status,
       }
 
       ResultScreen.RESULT.navigate(navigation, { data: result });
