@@ -1,6 +1,15 @@
 export function numberOnly (value: string, decimal: number = 0): string {
+
+  // remove all non numeric character except dot and comma
+  value = value.replace(/[^0-9.]/g, '');
+
+  // change comma to dot
+  value = value.replace(/,/g, '.');
+
   if (!value) return '';
   
+  if (value[0] === '.') value = `0${value}`;
+
   if (value.indexOf('.') !== -1) {
     const [before, after] = value.split('.');
     return `${before}.${after.slice(0, decimal)}`;
