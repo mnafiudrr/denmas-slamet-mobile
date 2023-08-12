@@ -20,11 +20,20 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
     address: string,
     birthplace: string,
     birthday: string,
+    riwayat_kesehatan_dahulu: string,
+    riwayat_kesehatan_keluarga: string,
   }
 
-  const [data, setData] = useState<dataTypes>({ fullname: '', address: '', birthplace: '', birthday: '' });
+  const [data, setData] = useState<dataTypes>({
+    fullname: '',
+    address: '', 
+    birthplace: '', 
+    birthday: '',
+    riwayat_kesehatan_dahulu: '',
+    riwayat_kesehatan_keluarga: '',
+  });
   const [selectingDate, setSelectingDate] = useState(false)
-  const { userData } = useContext(AuthContext);
+  const { userData, setUserData } = useContext(AuthContext);
 
   useEffect(() => {
     getUsers();
@@ -50,6 +59,8 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
         address: response.address,
         birthplace: response.birthplace,
         birthday: formatDate(response.birthday),
+        riwayat_kesehatan_dahulu: response.riwayat_kesehatan_dahulu,
+        riwayat_kesehatan_keluarga: response.riwayat_kesehatan_keluarga,
       });
       
     } catch (error) {
@@ -105,6 +116,8 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
         },
         data
       });
+
+      setUserData({...userData, fullname: data.fullname});
       
       Alert.alert(
         'Berhasil',
@@ -158,6 +171,20 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
                   readonly
                 />
               </Pressable>
+              <AppText style={styles.label}>Riwayat Kesehatan Dahulu</AppText>
+              <InputForm
+                style={styles.form}
+                placeholder='Riwayat kesehatan dahulu'
+                value={data.riwayat_kesehatan_dahulu}
+                onChangeText={(text: string) => setData({ ...data, riwayat_kesehatan_dahulu: text })}
+              />
+              <AppText style={styles.label}>Riwayat Kesehatan Keluarga</AppText>
+              <InputForm
+                style={styles.form}
+                placeholder='Riwayat kesehatan keluarga'
+                value={data.riwayat_kesehatan_keluarga}
+                onChangeText={(text: string) => setData({ ...data, riwayat_kesehatan_keluarga: text })}
+              />
               {
                 selectingDate &&
                   <DateTimePicker
