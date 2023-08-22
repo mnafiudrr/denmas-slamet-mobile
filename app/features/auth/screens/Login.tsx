@@ -79,6 +79,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}>
       <ScrollView>
+        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.0.0  </AppText>
         <View style={styles.container}>
           <Image source={require('~/assets/images/logo.png')} style={styles.logo} />
           <View style={styles.formBox}>
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     paddingTop: '35%',
     // backgroundColor: 'red',
-    height: heightScreen - 50,
+    height: heightScreen - 65,
   },
   logo: {
     maxWidth: 200,

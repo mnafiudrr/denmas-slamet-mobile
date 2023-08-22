@@ -1,4 +1,7 @@
-export const IP_SERVER = `http://103.163.161.18:9876/api`;
+export const STAGING_SERVER = `https://staging.denmasslamet.site`;
+export const PROD_SERVER = `https://denmasslamet.site`;
+
+export const IP_SERVER = `${STAGING_SERVER}/api`;
 
 export const AUTH_PATH = `${IP_SERVER}/auth`;
 export const USER_PATH = `${IP_SERVER}/user`;
