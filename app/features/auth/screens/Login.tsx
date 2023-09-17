@@ -10,6 +10,7 @@ import axios from 'axios';
 import { LOGIN_PATH } from '~/app/service/ApiServices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showLoading } from '~/app/core/utils/loader';
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 const heightScreen = Dimensions.get('screen').height;
@@ -40,6 +41,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
 
   const { setIsLoggedIn, setUserData } = useContext(AuthContext);
 
+  const [showPassword, setShowPassword] = useState(false);
   const [auth, setAuth] = useState({
     username: '',
     password: '',
@@ -72,18 +74,18 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
       
     } catch (error) {
       showLoading(false);
-      Alert.alert('Error', 'Username or Password is incorrect');
+      Alert.alert('Error', 'Username atau Password salah');
     }
   }
 
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}>
       <ScrollView>
-        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.0.0  </AppText>
+        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.1.0  </AppText>
         <View style={styles.container}>
           <Image source={require('~/assets/images/logo.png')} style={styles.logo} />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Sign In</AppText>
+            <AppText style={styles.title} bold>Masuk</AppText>
             <AppText style={styles.label}>Username / No HP</AppText>
             <InputForm 
               placeholder="Username" 
@@ -93,23 +95,28 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
               onChangeText={(value) => setAuth({...auth, username: value})} 
               style={styles.form}/>
             <AppText style={styles.label}>Password</AppText>
-            <InputForm 
-              placeholder="Password" 
-              onSubmitEditing={toggleLogin}
-              value={auth.password} 
-              onChangeText={(value) => setAuth({...auth, password: value})} 
-                style={styles.form} 
-              ref={refPassword} 
-              secureTextEntry
-              />
+            <View style={{ flexDirection:'row', alignItems: 'center' }}>
+              <InputForm 
+                placeholder="Password" 
+                onSubmitEditing={toggleLogin}
+                value={auth.password} 
+                onChangeText={(value) => setAuth({...auth, password: value})} 
+                  style={styles.form} 
+                ref={refPassword} 
+                secureTextEntry={!showPassword}
+                />
+              <Pressable onPress={() => setShowPassword(!showPassword)}>
+                <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="black" style={{ marginTop: -8, marginLeft: -35 }} />
+              </Pressable>
+            </View>
             <AppButton style={styles.button} onPress={toggleLogin}>
-              Sign In
+              Masuk
             </AppButton>
             {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}
           </View>
         </View>
         <Pressable style={styles.containerFooter} onPress={() => navigation.navigate('Auth/Signup')}>
-          <AppText style={styles.footer} bold>Sign Up</AppText>
+          <AppText style={styles.footer} bold>Daftar</AppText>
         </Pressable>
       </ScrollView>
     </AppView>

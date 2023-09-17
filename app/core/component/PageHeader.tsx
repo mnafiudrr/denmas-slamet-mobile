@@ -22,6 +22,7 @@ export default function PageHeader({
         flexDirection: 'row',
         alignItems: 'center',
         // backgroundColor: AppColors.blue,
+        justifyContent: 'space-between',
         paddingVertical: 10,
         ...style ?? {},
       }}
@@ -37,8 +38,13 @@ export default function PageHeader({
             {title??'Back'}
           </AppText>
         </Pressable>
+        <View style={{ 
+          flexDirection: 'row',
+          alignItems: 'center',
+         }}>
+          {suffix}
+        </View>
       </View>
-      {suffix}
     </ToggleableSafeArea>
   );
 }

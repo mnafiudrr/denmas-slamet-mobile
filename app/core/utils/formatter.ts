@@ -53,3 +53,7 @@ export function parseDate(dateString: string): Date {
   var date = new Date(year, month - 1, day);
   return date;
 }
+
+export function maxLenght(value: string, max: number): string {
+  return value.slice(0, max);
+}

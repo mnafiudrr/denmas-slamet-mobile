@@ -12,6 +12,9 @@ export const LOGIN_PATH = `${AUTH_PATH}/login`;
 export const REGISTER_PATH = `${AUTH_PATH}/register`;
 export const LOGOUT_PATH = `${AUTH_PATH}/logout`;
 
+export const NUTRITIONAL_STATUS_HISTORY_PATH = `${IP_SERVER}/nutritional-status-history`;
+export const PMT_MONITOR_PATH = `${IP_SERVER}/pmt-monitor`;
+
 export const GET_USER_PROFILE_PATH = `${USER_PATH}/profile`;
 
 export const GET_ALL_REPORT_PATH = `${REPORT_PATH}`;
