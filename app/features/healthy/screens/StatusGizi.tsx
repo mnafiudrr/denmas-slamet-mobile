@@ -65,14 +65,7 @@ export default function StatusGizi({ route }: Props) {
     if (!isValid)
       return Alert.alert('Peringatan', 'Mohon lengkapi data terlebih dahulu');
     
-    const month = Math.floor((new Date().getTime() - parseDate(data.tanggal_lahir).getTime()) / 1000 / 60 / 60 / 24 / 30);
-    const JenisKelamin = data.jenis_kelamin === 'L' ? 'lakiLaki' : 'perempuan';
     const tinggiBadan = parseFloat(data.tinggi_badan);
-
-    const dataStatusGizi = AppPanjangBadan[JenisKelamin][month];
-    
-    if (dataStatusGizi === undefined)
-      return Alert.alert('Peringatan', 'Data tidak ditemukan');
 
     const requestData = {
       birth_date: data.tanggal_lahir.split('-').reverse().join('-'),

@@ -81,7 +81,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
   return (
     <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}>
       <ScrollView>
-        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.1.0  </AppText>
+        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.1.1  </AppText>
         <View style={styles.container}>
           <Image source={require('~/assets/images/logo.png')} style={styles.logo} />
           <View style={styles.formBox}>
