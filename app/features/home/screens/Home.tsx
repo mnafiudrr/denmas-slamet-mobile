@@ -85,7 +85,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
       <View style={styles.container}>
         <View style={styles.headerView}>
           <Pressable style={styles.profile} onPress={() => ProfileScreen.PROFILE.navigate(navigation)}>
-            <Ionicons name="ios-person-circle" size={24} color="black" />
+            <Ionicons name="person-circle" size={24} color="black" />
             <AppText bold style={styles.topHeaderText}>{userData.fullname}</AppText>
           </Pressable>
           <MaterialIcons name="history" size={24} color="black" onPress={toggleRiwayat} />

@@ -4,16 +4,12 @@ type VisibleProps = {
   onInvisible?: () => JSX.Element;
 };
 
-const Visible = ({visible, children, onInvisible}: VisibleProps) => {
+const Visible = ({visible, children, onInvisible = undefined}: VisibleProps) => {
   if (visible) {
     return children;
   }
   if (onInvisible) return onInvisible();
   return null;
-};
-
-Visible.defaultProps = {
-  onInvisible: undefined,
 };
 
 export default Visible;

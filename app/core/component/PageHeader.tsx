@@ -8,7 +8,13 @@ import AppColors from '../static/AppColors';
 import ToggleableSafeArea from './ToggleSafeArea';
 
 export default function PageHeader({
-  title, style, textStyle, iconColor, withSafeArea, suffix, backButton,
+  title = '',
+  style = {},
+  textStyle = {},
+  iconColor = AppColors.black,
+  withSafeArea = false,
+  suffix = null,
+  backButton,
 }: {
   title?: string, style?:
   ViewStyle, textStyle?: TextStyle, iconColor?: string,
@@ -48,12 +54,3 @@ export default function PageHeader({
     </ToggleableSafeArea>
   );
 }
-
-PageHeader.defaultProps = {
-  title: '',
-  style: {},
-  textStyle: {},
-  iconColor: AppColors.black,
-  withSafeArea: false,
-  suffix: null,
-};
