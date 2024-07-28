@@ -41,7 +41,7 @@ export default function PageHeader({
               marginLeft: 10, ...textStyle,
             }}
           >
-            {title??'Back'}
+            {title??'Kembali'}
           </AppText>
         </Pressable>
         <View style={{ 
