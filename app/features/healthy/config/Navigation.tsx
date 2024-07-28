@@ -3,6 +3,8 @@ import React from 'react';
 import Screens from './Screens';
 import FormPregnancy from '../screens/FormPregnancy';
 import FormHealthy from '../screens/FormHealthy';
+import StatusGizi from '../screens/StatusGizi';
+import FormPmt from '../screens/FormPmt';
 
 function getNavigation(Root: TypedNavigator<any, any, any, any, any>) {
   return [
@@ -21,6 +23,24 @@ function getNavigation(Root: TypedNavigator<any, any, any, any, any>) {
       key={Screens.FORM_HEALTHY.KEY}
       options={{
         title: Screens.FORM_HEALTHY.TITLE,
+        headerShown: false,
+      }}
+    />,
+    <Root.Screen
+      name={Screens.STATUS_GIZI.KEY}
+      component={StatusGizi}
+      key={Screens.STATUS_GIZI.KEY}
+      options={{
+        title: Screens.STATUS_GIZI.TITLE,
+        headerShown: false,
+      }}
+    />,
+    <Root.Screen
+      name={Screens.FORM_PMT.KEY}
+      component={FormPmt}
+      key={Screens.FORM_PMT.KEY}
+      options={{
+        title: Screens.FORM_PMT.TITLE,
         headerShown: false,
       }}
     />,

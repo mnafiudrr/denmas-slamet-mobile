@@ -107,7 +107,7 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
   }
 
   return (
-    <AppView withSafeArea withHeader title='Back' imageBg={require('~/assets/images/bg-info-kesehatan.png')}>
+    <AppView withSafeArea withHeader title='Kembali' imageBg={require('~/assets/images/bg-info-kesehatan.png')}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
   formBox: {
     width: '100%',
     padding: 20,
+    paddingTop: 0,
     flex: 1,
     overflow: 'hidden',
   },

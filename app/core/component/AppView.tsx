@@ -4,12 +4,16 @@ import ToggleableSafeArea from './ToggleSafeArea';
 import PageHeader from './PageHeader';
 
 export default function AppView({
-  children, withHeader, title, style, styleHeader,
-  styleBg,
-  withSafeArea,
-  suffixHeader,
+  children, 
+  withHeader = false, 
+  title = '', 
+  style = {}, 
+  styleHeader = {},
+  styleBg = {},
+  withSafeArea = false,
+  suffixHeader = null,
   backButton,
-  imageBg,
+  imageBg = null,
 }: {children: React.ReactNode, withHeader?: boolean,
   withSafeArea?: boolean,
   title?: string, style?: ViewStyle,
@@ -51,14 +55,3 @@ export default function AppView({
     </ImageBackground>
   );
 }
-
-AppView.defaultProps = {
-  withHeader: false,
-  title: '',
-  style: {},
-  styleHeader: {},
-  suffixHeader: null,
-  withSafeArea: false,
-  imageBg: null,
-  styleBg: {},
-};

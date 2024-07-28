@@ -1,4 +1,4 @@
-import { View, Alert, StyleSheet, Image, BackHandler, Pressable } from 'react-native';
+import { View, Alert, StyleSheet, Image, BackHandler, Pressable, TouchableOpacity } from 'react-native';
 import React, { useContext } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
@@ -22,11 +22,11 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
     React.useCallback(() => {
       const onBackPress = () => {
         Alert.alert(
-          "Sign Out",
-          "You sure to Sign Out??",
+          "Keluar",
+          "Apakah anda yakin ingin keluar?",
           [
             {
-              text: "Yep",
+              text: "Ya",
               onPress: requestLogout,
               style: "default",
             },
@@ -69,6 +69,10 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
     return HistoryScreen.LIST_USER.navigate(navigation, { access_type: 'healthy'});
   }
 
+  const togglePeriksaStatusGizi = () => {
+    return HealthyScreen.STATUS_GIZI.navigate(navigation, { profile_id: userData.profile_id });
+  }
+
   const toggleRiwayat = () => {
     if (!userData.is_admin)
       return HistoryScreen.HISTORY.navigate(navigation, { profile_id: userData.profile_id });
@@ -81,7 +85,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
       <View style={styles.container}>
         <View style={styles.headerView}>
           <Pressable style={styles.profile} onPress={() => ProfileScreen.PROFILE.navigate(navigation)}>
-            <Ionicons name="ios-person-circle" size={24} color="black" />
+            <Ionicons name="person-circle" size={24} color="black" />
             <AppText bold style={styles.topHeaderText}>{userData.fullname}</AppText>
           </Pressable>
           <MaterialIcons name="history" size={24} color="black" onPress={toggleRiwayat} />
@@ -93,8 +97,21 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         <AppButton style={styles.button} onPress={toggleCekKesehatan}>
           Cek Kesehatan
         </AppButton>
+        <AppButton style={styles.button} onPress={togglePeriksaStatusGizi}>
+          Periksa Status Gizi
+        </AppButton>
         <Image source={require('~/assets/images/person-home.png')} style={styles.image}/>
       </View>
+      {
+        userData.is_admin ? (
+          <TouchableOpacity
+            style={styles.floatingButton}
+            onPress={() => HealthyScreen.FORM_PMT.navigate(navigation)}
+          >
+            <AppText style={{ color: '#ffffff' }} bold>PMT</AppText>
+          </TouchableOpacity>
+        ) : null
+      }
     </AppView>
   )
 }
@@ -108,6 +125,7 @@ const styles = StyleSheet.create({
     width: '60%',
     maxWidth: 250,
     elevation: 10,
+    marginTop: 20,
   },
   headerView: {
     flexDirection: 'row',
@@ -136,5 +154,17 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     marginBottom: '-20%',
+  },
+  floatingButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    height: 40,
+    backgroundColor: '#29B6F6',
+    borderRadius: 100,
+    elevation: 5,
   }
 });

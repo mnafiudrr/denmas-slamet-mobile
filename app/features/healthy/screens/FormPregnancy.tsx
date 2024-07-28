@@ -74,7 +74,7 @@ export default function FormPregnancy({ route }: Props) {
   }
 
   return (
-    <AppView withSafeArea withHeader title='Back' imageBg={require('~/assets/images/bg-kehamilan.png')}>
+    <AppView withSafeArea withHeader title='Kembali' imageBg={require('~/assets/images/bg-kehamilan.png')}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
   formBox: {
     width: '100%',
     padding: 20,
+    paddingTop: 0,
     flex: 1,
   },
   title: {

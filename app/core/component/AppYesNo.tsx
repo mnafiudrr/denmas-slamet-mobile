@@ -7,9 +7,13 @@ type AppYesNoProps = {
   value?: boolean,
   onValueChange?: (value: boolean) => void,
   style?: StyleProp<ViewStyle>,
+  customLabel?: {
+    yes?: string,
+    no?: string,
+  }
 }
 
-export default function AppYesNo({value, onValueChange, style}: AppYesNoProps) {
+export default function AppYesNo({value, onValueChange, style, customLabel}: AppYesNoProps) {
 
   return (
     <View style={[styles.container, style]}>
@@ -20,7 +24,9 @@ export default function AppYesNo({value, onValueChange, style}: AppYesNoProps) {
                 onValueChange={onValueChange}
                 color={value ? '#29B6F6' : undefined}
               />
-        <AppText style={styles.label}>Ya</AppText>
+        <AppText style={styles.label}>
+          {customLabel?.yes || 'Ya'}
+        </AppText>
       </Pressable>
       <Pressable style={styles.inputContainer}>
         <Checkbox
@@ -29,7 +35,9 @@ export default function AppYesNo({value, onValueChange, style}: AppYesNoProps) {
                 onValueChange={(value) => onValueChange && onValueChange(!value)}
                 color={value === false ? '#29B6F6' : undefined}
               />
-        <AppText style={styles.label}>Tidak</AppText>
+        <AppText style={styles.label}>
+          {customLabel?.no || 'Tidak'}
+        </AppText>
       </Pressable>
     </View>
   );

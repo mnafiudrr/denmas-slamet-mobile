@@ -32,7 +32,7 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
     riwayat_kesehatan_dahulu: '',
     riwayat_kesehatan_keluarga: '',
   });
-  const [selectingDate, setSelectingDate] = useState(false)
+  const [selectingDate, setSelectingDate] = useState(false);
   const { userData, setUserData } = useContext(AuthContext);
 
   useEffect(() => {
@@ -195,6 +195,9 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
                       setSelectingDate(false);
                       setData({ ...data, birthday: selectedDate ? formatDate(selectedDate) : data.birthday });
                     }}
+                    // maximum date 5 years ago, and minimum date 70 years ago
+                    maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 5))}
+                    minimumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 70))}
                   />
               }
             </View>

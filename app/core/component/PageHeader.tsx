@@ -8,7 +8,13 @@ import AppColors from '../static/AppColors';
 import ToggleableSafeArea from './ToggleSafeArea';
 
 export default function PageHeader({
-  title, style, textStyle, iconColor, withSafeArea, suffix, backButton,
+  title = '',
+  style = {},
+  textStyle = {},
+  iconColor = AppColors.black,
+  withSafeArea = false,
+  suffix = null,
+  backButton,
 }: {
   title?: string, style?:
   ViewStyle, textStyle?: TextStyle, iconColor?: string,
@@ -22,6 +28,7 @@ export default function PageHeader({
         flexDirection: 'row',
         alignItems: 'center',
         // backgroundColor: AppColors.blue,
+        justifyContent: 'space-between',
         paddingVertical: 10,
         ...style ?? {},
       }}
@@ -34,20 +41,16 @@ export default function PageHeader({
               marginLeft: 10, ...textStyle,
             }}
           >
-            {title??'Back'}
+            {title??'Kembali'}
           </AppText>
         </Pressable>
+        <View style={{ 
+          flexDirection: 'row',
+          alignItems: 'center',
+         }}>
+          {suffix}
+        </View>
       </View>
-      {suffix}
     </ToggleableSafeArea>
   );
 }
-
-PageHeader.defaultProps = {
-  title: '',
-  style: {},
-  textStyle: {},
-  iconColor: AppColors.black,
-  withSafeArea: false,
-  suffix: null,
-};

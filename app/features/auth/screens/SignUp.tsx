@@ -1,6 +1,7 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
+import { Pressable } from 'react-native';
 import { Alert, Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
@@ -8,10 +9,12 @@ import AppView from '~/app/core/component/AppView';
 import InputForm, { inputHandle } from '~/app/core/component/InputForm';
 import { showLoading } from '~/app/core/utils/loader';
 import { REGISTER_PATH } from '~/app/service/ApiServices';
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 export default function SignUp({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
 
+  const [showPassword, setShowPassword] = useState(false)
   const [data, setData] = useState({
     name: '',
     phone: '',
@@ -38,7 +41,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
 
   const toggleSignUp = async() => {
     if (!validate()) 
-      return Alert.alert('Sign Up', 'Please fill all required fields');
+      return Alert.alert('Daftar', 'Silahkan isi semua form');
 
     showLoading(true);
     try {
@@ -56,7 +59,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
         }
       });
 
-      Alert.alert('Sign Up', 'Sign Up Success, Please Login to continue');
+      Alert.alert('Daftar', 'Daftar berhasil, silahkan login');
       navigation.navigate('Auth/Login');
 
     } catch (error: any) {
@@ -65,9 +68,9 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
         const errorData = error.response.data.errors;
         const errorKeys = Object.keys(errorData);
         const errorMessage = errorData[errorKeys[0]][0];
-        Alert.alert('Sign Up', errorMessage);
+        Alert.alert('Daftar', errorMessage);
       } else {
-        Alert.alert('Sign Up', 'Sign Up Failed, Please try again later');
+        Alert.alert('Daftar', 'Daftar gagal, silahkan coba lagi');
       }
       
     }
@@ -75,12 +78,12 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
   }
 
   return (
-    <AppView withSafeArea withHeader title='Back'>
+    <AppView withSafeArea withHeader title='Masuk'>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Sign Up</AppText>
-            <AppText style={styles.label}>Name</AppText>
+            <AppText style={styles.title} bold>Daftar</AppText>
+            <AppText style={styles.label}>Nama</AppText>
             <InputForm 
               placeholder="Nama" 
               onSubmitEditing={() => refPhone.current?.onFocus()}
@@ -108,16 +111,21 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
               onChangeText={(value) => setData({...data, username: value})} 
               style={styles.form}/>
             <AppText style={styles.label}>Password</AppText>
-            <InputForm 
-              placeholder="Password" 
-              value={data.password} 
-              onChangeText={(value) => setData({...data, password: value})} 
-              style={styles.form} 
-              ref={refPassword} 
-              secureTextEntry
-            />
+            <View style={{ flexDirection:'row', alignItems: 'center' }}>
+              <InputForm 
+                placeholder="Password" 
+                value={data.password} 
+                onChangeText={(value) => setData({...data, password: value})} 
+                style={styles.form} 
+                ref={refPassword} 
+                secureTextEntry={!showPassword}
+              />
+              <Pressable onPress={() => setShowPassword(!showPassword)}>
+                <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="black" style={{ marginTop: -8, marginLeft: -35 }} />
+              </Pressable>
+            </View>
             <AppButton style={styles.button} onPress={toggleSignUp}>
-              Sign Up
+              Daftar
             </AppButton>
           </View>
           <View style={styles.footer}>

@@ -10,8 +10,7 @@ type LoadingProps = {
   show?: boolean,
 };
 
-const AppLoading = forwardRef((props: LoadingProps, ref: Ref<any>) => {
-  const {show = true} = props;
+const AppLoading = forwardRef(({show = false}: LoadingProps, ref: Ref<any>) => {
   const [isShow, setShow] = useState<boolean>(show ?? false);
 
   useImperativeHandle(ref, () => ({
@@ -50,9 +49,6 @@ const AppLoading = forwardRef((props: LoadingProps, ref: Ref<any>) => {
     </Visible>
   );
 });
-AppLoading.defaultProps = {
-  show: false,
-};
 
 export {AppLoading};
 export default AppLoading;

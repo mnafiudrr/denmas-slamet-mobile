@@ -83,6 +83,7 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
       }
       setSplashLoading(false);
     } catch (error) {
+      setSplashLoading(false);
       console.log(error);
     }
   }
