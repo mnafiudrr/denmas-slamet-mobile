@@ -79,34 +79,47 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
   }
 
   return (
-    <AppView withSafeArea imageBg={require('~/assets/images/bg-login.png')}>
+    <AppView withSafeArea imageBg={require("~/assets/images/bg-login.png")}>
       <ScrollView>
-        <AppText style={{ fontSize: 12, textAlign: 'right', marginRight: 10 }}>Version 1.2.0  </AppText>
+        <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10 }}>
+          Version 1.3.0{" "}
+        </AppText>
         <View style={styles.container}>
-          <Image source={require('~/assets/images/logo.png')} style={styles.logo} />
+          <Image
+            source={require("~/assets/images/logo.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Masuk</AppText>
+            <AppText style={styles.title} bold>
+              Masuk
+            </AppText>
             <AppText style={styles.label}>Username / No HP</AppText>
-            <InputForm 
-              placeholder="Username" 
+            <InputForm
+              placeholder="Username"
               onSubmitEditing={() => refPassword.current?.onFocus()}
               returnKeyType="next"
-              value={auth.username} 
-              onChangeText={(value) => setAuth({...auth, username: value})} 
-              style={styles.form}/>
+              value={auth.username}
+              onChangeText={(value) => setAuth({ ...auth, username: value })}
+              style={styles.form}
+            />
             <AppText style={styles.label}>Password</AppText>
-            <View style={{ flexDirection:'row', alignItems: 'center' }}>
-              <InputForm 
-                placeholder="Password" 
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <InputForm
+                placeholder="Password"
                 onSubmitEditing={toggleLogin}
-                value={auth.password} 
-                onChangeText={(value) => setAuth({...auth, password: value})} 
-                  style={styles.form} 
-                ref={refPassword} 
+                value={auth.password}
+                onChangeText={(value) => setAuth({ ...auth, password: value })}
+                style={styles.form}
+                ref={refPassword}
                 secureTextEntry={!showPassword}
-                />
+              />
               <Pressable onPress={() => setShowPassword(!showPassword)}>
-                <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="black" style={{ marginTop: -8, marginLeft: -35 }} />
+                <Ionicons
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={24}
+                  color="black"
+                  style={{ marginTop: -8, marginLeft: -35 }}
+                />
               </Pressable>
             </View>
             <AppButton style={styles.button} onPress={toggleLogin}>
@@ -115,8 +128,13 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
             {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}
           </View>
         </View>
-        <Pressable style={styles.containerFooter} onPress={() => navigation.navigate('Auth/Signup')}>
-          <AppText style={styles.footer} bold>Daftar</AppText>
+        <Pressable
+          style={styles.floatingButton}
+          onPress={() => navigation.navigate("Auth/Signup")}
+        >
+          <AppText style={styles.footer} bold>
+            Daftar
+          </AppText>
         </Pressable>
       </ScrollView>
     </AppView>
@@ -126,20 +144,20 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     // justifyContent: 'center',
-    paddingTop: '35%',
+    paddingTop: "35%",
     // backgroundColor: 'red',
-    height: heightScreen - 65,
+    height: heightScreen - 80,
   },
   logo: {
     maxWidth: 200,
     maxHeight: 200,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 100,
   },
   formBox: {
-    width: '100%',
+    width: "100%",
     padding: 20,
   },
   title: {
@@ -156,17 +174,17 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
   },
-  containerFooter: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    alignItems: 'flex-end',
-    // right: 0,
-    height: 50,
-    // backgroundColor: 'red',
-  },
   footer: {
-    padding: 15,
-    color: '#29B6F6',
+    color: "#29B6F6",
+  },
+  floatingButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 60,
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    height: 20,
+    borderRadius: 100
   },
 });

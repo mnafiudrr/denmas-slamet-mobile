@@ -1,5 +1,5 @@
-export const STAGING_SERVER = `https://staging.denmasslamet.site`;
-export const PROD_SERVER = `https://denmasslamet.site`;
+export const STAGING_SERVER = `https://staging.denmasslamet.com`;
+export const PROD_SERVER = `https://denmasslamet.com`;
 
 export const IP_SERVER = `${PROD_SERVER}/api`;
 
