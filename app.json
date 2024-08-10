@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Denmas Slamet - Staging",
-    "slug": "denmas-slamet-staging",
+    "name": "Denmas Slamet",
+    "slug": "denmas-slamet",
     "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +17,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.fiufiu.denmasslamet.staging",
+      "package": "com.fiufiu.denmasslamet",
       "versionCode": 11
     },
     "splash": {
@@ -28,7 +28,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "b0e33679-2c06-4776-8999-d02d86e90d76"
+        "projectId": "a94e0204-c0f0-43e0-9e1f-68ced41f9108"
       }
     }
   }
