@@ -13,39 +13,51 @@ export default function ListData({ route }: { navigation: CompositeNavigationPro
   const { data, title } = route.params;
 
   return (
-    <AppView withSafeArea>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>{ title ?? 'Riwayat' }</AppText>
-            {
-              data.map((item: {
-                id: string,
-                data: [{
-                  label: string,
-                  value: string,
-                }],
-              }, index: number) => (
+            <AppText style={styles.title} bold>
+              {title ?? "Riwayat"}
+            </AppText>
+            {data.map(
+              (
+                item: {
+                  id: string;
+                  data: [
+                    {
+                      label: string;
+                      value: string;
+                    }
+                  ];
+                },
+                index: number
+              ) => (
                 <Pressable key={index} style={styles.warpForm}>
-                  {
-                    item.data.map((item: {
-                      label: string,
-                      value: string,
-                    }, idx: number) => (
+                  {item.data.map(
+                    (
+                      item: {
+                        label: string;
+                        value: string;
+                      },
+                      idx: number
+                    ) => (
                       <View key={idx}>
                         <AppText style={styles.label}>{item.label}</AppText>
-                        <AppText style={styles.value} bold>{item.value}</AppText>
+                        <AppText style={styles.value} bold>
+                          {item.value}
+                        </AppText>
                       </View>
-                    ))
-                  }
+                    )
+                  )}
                 </Pressable>
-              ))
-            }
+              )
+            )}
           </View>
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -53,26 +65,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   formBox: {
-    width: '100%',
-    padding: 20,
+    width: "100%",
+    paddingHorizontal: 20,
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 15,
   },
   warpForm: {
-    marginBottom: 20,
+    marginBottom: 10,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 1, height: 1 },
-    shadowOpacity:  0.1,
+    shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 10,
+    elevation: 2,
   },
   label: {
     fontSize: 15,
@@ -85,9 +97,9 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     elevation: 5,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   buttonText: {
-    color: '#29B6F6',
-  }
+    color: "#29B6F6",
+  },
 });

@@ -67,6 +67,9 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
 
         await AsyncStorage.setItem('token', response.token);
 
+        if (typeof response.user.is_admin != "boolean")
+          response.user.is_admin = parseInt(response.user.is_admin);
+
         setUserData({...response.user, token: response.token});
         showLoading(false);
         setIsLoggedIn(true);

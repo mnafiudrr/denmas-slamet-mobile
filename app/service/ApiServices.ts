@@ -1,7 +1,7 @@
 export const STAGING_SERVER = `https://staging.denmasslamet.com`;
 export const PROD_SERVER = `https://denmasslamet.com`;
 
-export const IP_SERVER = `${PROD_SERVER}/api`;
+export const IP_SERVER = `${STAGING_SERVER}/api`;
 
 export const AUTH_PATH = `${IP_SERVER}/auth`;
 export const USER_PATH = `${IP_SERVER}/user`;
@@ -18,3 +18,5 @@ export const PMT_MONITOR_PATH = `${IP_SERVER}/pmt-monitor`;
 export const GET_USER_PROFILE_PATH = `${USER_PATH}/profile`;
 
 export const GET_ALL_REPORT_PATH = `${REPORT_PATH}`;
+
+export const GET_PRINSIP_3J = `${IP_SERVER}/prinsip-3j`;

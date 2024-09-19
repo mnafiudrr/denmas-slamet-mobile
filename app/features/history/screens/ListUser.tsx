@@ -44,7 +44,7 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
           Accept: 'application/json',
         },
       });
-      
+
       const response = promise.data.data.filter((item: any) => !item.is_admin).map((item: any) => {
         return { 
           id: item.id,
@@ -72,7 +72,7 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
   }
 
   return (
-    <AppView withSafeArea>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   formBox: {
     width: '100%',
-    padding: 20,
+    paddingHorizontal: 20,
     flex: 1,
     overflow: 'hidden',
   },
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   warpForm: {
-    marginBottom: 20,
+    marginBottom: 10,
     padding: 10,
     backgroundColor: '#f5f5f5',
     borderRadius: 10,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity:  0.1,
     shadowRadius: 5,
-    elevation: 10,
+    elevation: 2,
   },
   label: {
     fontSize: 15,
