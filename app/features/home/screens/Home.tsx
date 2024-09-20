@@ -14,6 +14,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showLoading } from '~/app/core/utils/loader';
 import ProfileScreen from '../../profile/config/Screens';
 import PrinsipScreen from '../../prinsip/config/Screens';
+import FaqScreen from '../../faq/config/Screens';
+import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
+import IntervensiScreen from '../../intervensi/config/Screens';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -109,7 +112,10 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         </AppText>
       </View>
       <View style={styles.bottomContent}>
-        <AppButton style={styles.button} onPress={() => PrinsipScreen.PRINSIP.navigate(navigation)}>
+        <AppButton
+          style={styles.button}
+          onPress={() => PrinsipScreen.PRINSIP.navigate(navigation)}
+        >
           Prinsip 3J
         </AppButton>
         <Image
@@ -129,28 +135,28 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
       ) : null}
       <View style={styles.bottomNavigationBar}>
         <Pressable style={styles.bottomNavButton} onPress={toggleCekKesehatan}>
-          <MaterialIcons name="home" size={24} color="black" />
+          <Stethoscope width={26} height={26} color="black" />
           <AppText style={styles.bottomNavText}>Periksa</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={togglePeriksaStatusGizi}
         >
-          <MaterialIcons name="history" size={24} color="black" />
+          <ClinicalFe width={26} height={26} color="black" />
           <AppText style={styles.bottomNavText}>Status Gizi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
-          onPress={() => console.log("Profile")}
+          onPress={() => IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)}
         >
-          <Ionicons name="person-circle" size={24} color="black" />
+          <CriticalCare width={26} height={26} color="black" />
           <AppText style={styles.bottomNavText}>Intervensi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
-          onPress={() => console.log("Setting")}
+          onPress={() => FaqScreen.FAQ.navigate(navigation)}
         >
-          <Ionicons name="settings" size={24} color="black" />
+          <Forum width={26} height={26} color="black" />
           <AppText style={styles.bottomNavText}>FAQ</AppText>
         </Pressable>
       </View>
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
     width: "60%",
     maxWidth: 250,
     elevation: 10,
-    marginTop: 20,
+    marginBottom: 20,
   },
   headerView: {
     flexDirection: "row",
@@ -224,7 +230,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 10,
+    elevation: 15,
   },
   bottomNavButton: {
     alignItems: "center",
@@ -235,7 +241,6 @@ const styles = StyleSheet.create({
   },
   bottomNavText: {
     fontSize: 10,
-    marginTop: 5,
     color: "black",
   },
 });

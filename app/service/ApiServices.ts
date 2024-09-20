@@ -20,3 +20,5 @@ export const GET_USER_PROFILE_PATH = `${USER_PATH}/profile`;
 export const GET_ALL_REPORT_PATH = `${REPORT_PATH}`;
 
 export const GET_PRINSIP_3J = `${IP_SERVER}/prinsip-3j`;
+export const GET_FAQ = `${IP_SERVER}/frequently-asked-questions`;
+export const GET_INTERVENSI = `${IP_SERVER}/intervention`;

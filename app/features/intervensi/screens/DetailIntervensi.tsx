@@ -7,16 +7,22 @@ import AppView from "~/app/core/component/AppView";
 import HtmlContent from "~/app/core/component/HtmlContent";
 import { AuthContext } from "~/app/core/config/AuthContext";
 import { showLoading } from "~/app/core/utils/loader";
-import { GET_PRINSIP_3J } from "~/app/service/ApiServices";
+import { GET_INTERVENSI } from "~/app/service/ApiServices";
 
-export default function Prinsip({
-  navigation,
-}: {
+type Props = {
   navigation: CompositeNavigationProp<any, any>;
-}) {
-  const { userData } = useContext(AuthContext);
+  route: any;
+};
 
-  const [content, setcontent] = useState('')
+export default function DetailIntervensi({
+  navigation,
+  route,
+}: Props) {
+  const { userData } = useContext(AuthContext);
+  const { key } = route.params;
+
+  const [content, setcontent] = useState("");
+  const [title, setTitle] = useState("Detail Intervensi")
 
   useEffect(() => {
     getData();
@@ -27,13 +33,14 @@ export default function Prinsip({
     try {
       const promise = await axios({
         method: "get",
-        url: GET_PRINSIP_3J,
+        url: `${GET_INTERVENSI}/${key}`,
         timeout: 15000,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userData.token}`,
         },
       });
+      setTitle(promise.data.title);
       setcontent(promise.data.content);
     } catch (error) {
       console.log(error);
@@ -47,7 +54,7 @@ export default function Prinsip({
         <View style={styles.container}>
           <View style={styles.formBox}>
             <AppText style={styles.title} bold>
-              Prinsip 3J
+              {title}
             </AppText>
             <HtmlContent html={content} />
           </View>
@@ -69,7 +76,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   title: {
-    fontSize: 25,
+    fontSize: 21,
     textAlign: "center",
     marginBottom: 15,
   },
