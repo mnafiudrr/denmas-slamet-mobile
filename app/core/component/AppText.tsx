@@ -12,7 +12,14 @@ type AppTextProps = TextProps & {
 };
 
 export default function AppText({
-  style, font, semiBold, bold, children, white, color, ...props
+  style,
+  font = 'roboto',
+  semiBold = false,
+  bold = false,
+  children = '',
+  white = false,
+  color = '',
+  ...props
 }: AppTextProps) {
   const flatStyle = useMemo(() => {
     const {fontWeight, ...values} = StyleSheet.flatten(style ?? {});
@@ -34,12 +41,3 @@ export default function AppText({
     </Text>
   );
 }
-
-AppText.defaultProps = {
-  font: 'roboto',
-  semiBold: false,
-  bold: false,
-  children: '',
-  white: false,
-  color: '',
-};

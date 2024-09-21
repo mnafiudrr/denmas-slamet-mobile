@@ -1,18 +1,28 @@
-import { CompositeNavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { Alert, BackHandler, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import AppButton from '~/app/core/component/AppButton';
-import AppText from '~/app/core/component/AppText';
-import AppView from '~/app/core/component/AppView';
-import HomeScreen from '../../home/config/Screens';
-import { FontAwesome5 } from '@expo/vector-icons';
+import {
+  CompositeNavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from "@react-navigation/native";
+import React, { useState } from "react";
+import {
+  Alert,
+  BackHandler,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
+import AppButton from "~/app/core/component/AppButton";
+import AppText from "~/app/core/component/AppText";
+import AppView from "~/app/core/component/AppView";
+import HomeScreen from "../../home/config/Screens";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 type RouteProps = {
-  route: any
-}
+  route: any;
+};
 
 export default function Result({ route }: RouteProps) {
-
   const { data } = route.params;
   const navigation = useNavigation<CompositeNavigationProp<any, any>>();
 
@@ -23,32 +33,39 @@ export default function Result({ route }: RouteProps) {
         return true;
       };
 
-      const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      const subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
 
       return () => subscription.remove();
     }, [])
   );
 
   const toggleNextButton = (): void => {
-    const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2].name;
-    if (previousScreen === 'History/History') return navigation.goBack();
+    const previousScreen =
+      navigation.getState().routes[navigation.getState().routes.length - 2]
+        .name;
+    if (previousScreen === "History/History") return navigation.goBack();
     return HomeScreen.HOME.navigate(navigation);
-  }
+  };
 
   const showInformation = (type: string): void => {
     const information = data.statuses.find((item: any) => item.type === type);
-    
+
     Alert.alert(
-      'Informasi Kesehatan',
-      `Status ${processString(type)} anda ${information.name}. ${information.description}.`
+      "Informasi Kesehatan",
+      `Status ${processString(type)} anda ${information.name}. ${
+        information.description
+      }.`
     );
-  }
+  };
 
   function processString(input: string) {
     if (input.length === 3) {
       return input.toUpperCase();
     } else {
-      return input.replace(/_/g, ' ');
+      return input.replace(/_/g, " ");
     }
   }
 
@@ -57,51 +74,121 @@ export default function Result({ route }: RouteProps) {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Hasil</AppText>
+            <AppText style={styles.title} bold>
+              Hasil
+            </AppText>
             <View style={styles.warpForm}>
               <AppText style={styles.label}>Nama</AppText>
-              <AppText style={styles.value} bold>{data.name}</AppText>
+              <AppText style={styles.value} bold>
+                {data.name}
+              </AppText>
               <AppText style={styles.label}>Tanggal</AppText>
-              <AppText style={styles.value} bold>{data.date}</AppText>
+              <AppText style={styles.value} bold>
+                {data.date}
+              </AppText>
               <AppText style={styles.label}>IMT</AppText>
               <AppText style={styles.value} bold>
-                {data.imt}{` `}
-                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('imt')} />
+                {data.imt}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={12}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "imt",
+                    })
+                  }
+                />
               </AppText>
               <AppText style={styles.label}>Tekanan Darah</AppText>
               <AppText style={styles.value} bold>
-                {data.tekanan_darah}{` `}
-                <FontAwesome5 name="question-circle" size={15} style={styles.questionIcon} onPress={() => showInformation('tekanan_darah')} />
+                {data.tekanan_darah}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={15}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "tekanan_darah",
+                    })
+                  }
+                />
               </AppText>
               <AppText style={styles.label}>Gula Darah</AppText>
               <AppText style={styles.value} bold>
-                {data.gula_darah}{` `}
-                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('gula')} />
+                {data.gula_darah}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={12}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "gula",
+                    })
+                  }
+                />
               </AppText>
               <AppText style={styles.label}>HB</AppText>
               <AppText style={styles.value} bold>
-                {data.hb}{` `}
-                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('hb')} />
+                {data.hb}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={12}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "hb",
+                    })
+                  }
+                />
               </AppText>
               <AppText style={styles.label}>Kolesterol</AppText>
               <AppText style={styles.value} bold>
-                {data.kolesterol}{` `}
-                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('kolesterol')} />
+                {data.kolesterol}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={12}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "kolesterol",
+                    })
+                  }
+                />
               </AppText>
               <AppText style={styles.label}>Asam Urat</AppText>
               <AppText style={styles.value} bold>
-                {data.asam_urat}{` `}
-                <FontAwesome5 name="question-circle" size={12} style={styles.questionIcon} onPress={() => showInformation('asam_urat')} />
+                {data.asam_urat}
+                {` `}
+                <FontAwesome5
+                  name="question-circle"
+                  size={12}
+                  style={styles.questionIcon}
+                  onPress={() =>
+                    navigation.navigate("Intervensi/Detail", {
+                      key: "asam_urat",
+                    })
+                  }
+                />
               </AppText>
             </View>
-            <AppButton style={styles.button} textStyle={styles.buttonText} onPress={toggleNextButton}>
+            <AppButton
+              style={styles.button}
+              textStyle={styles.buttonText}
+              onPress={toggleNextButton}
+            >
               OK
             </AppButton>
           </View>
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -109,22 +196,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   formBox: {
-    width: '100%',
+    width: "100%",
     padding: 20,
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 15,
   },
   warpForm: {
     marginBottom: 20,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
@@ -141,12 +228,12 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     elevation: 5,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   buttonText: {
-    color: '#29B6F6',
+    color: "#29B6F6",
   },
   questionIcon: {
-    color: '#29B6F6',
-  }
+    color: "#29B6F6",
+  },
 });

@@ -10,6 +10,9 @@ import HealthyNavigation from '~/app/features/healthy/config/Navigation';
 import ResultNavigation from '~/app/features/result/config/Navigation';
 import HistoryNavigation from '~/app/features/history/config/Navigation';
 import ProfileNavigation from '~/app/features/profile/config/Navigation';
+import PrinsipNavigation from '~/app/features/prinsip/config/Navigation';
+import FaqNavigation from '~/app/features/faq/config/Navigation';
+import IntervensiNavigation from '~/app/features/intervensi/config/Navigation';
 
 const Root = createStackNavigator();
 
@@ -20,6 +23,9 @@ function listScreen() {
     ...ResultNavigation.getNavigation(Root),
     ...HistoryNavigation.getNavigation(Root),
     ...ProfileNavigation.getNavigation(Root),
+    ...PrinsipNavigation.getNavigation(Root),
+    ...FaqNavigation.getNavigation(Root),
+    ...IntervensiNavigation.getNavigation(Root),
   ];
 }
 

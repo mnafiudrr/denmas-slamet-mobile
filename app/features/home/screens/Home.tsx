@@ -13,6 +13,10 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showLoading } from '~/app/core/utils/loader';
 import ProfileScreen from '../../profile/config/Screens';
+import PrinsipScreen from '../../prinsip/config/Screens';
+import FaqScreen from '../../faq/config/Screens';
+import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
+import IntervensiScreen from '../../intervensi/config/Screens';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -80,40 +84,84 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
   }
 
   return (
-    <AppView withSafeArea imageBg={require('~/assets/images/bg-home.png')}
-    >
+    <AppView withSafeArea imageBg={require("~/assets/images/bg-home.png")}>
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <Pressable style={styles.profile} onPress={() => ProfileScreen.PROFILE.navigate(navigation)}>
-            <Ionicons name="ios-person-circle" size={24} color="black" />
-            <AppText bold style={styles.topHeaderText}>{userData.fullname}</AppText>
+          <Pressable
+            style={styles.profile}
+            onPress={() => ProfileScreen.PROFILE.navigate(navigation)}
+          >
+            <Ionicons name="person-circle" size={24} color="black" />
+            <AppText bold style={styles.topHeaderText}>
+              {userData.fullname}
+            </AppText>
           </Pressable>
-          <MaterialIcons name="history" size={24} color="black" onPress={toggleRiwayat} />
+          <MaterialIcons
+            name="history"
+            size={24}
+            color="black"
+            onPress={toggleRiwayat}
+          />
         </View>
-        <AppText bold style={styles.title}>{`Selamat Datang\ndi Denmas Slamet`}</AppText>
-        <AppText style={styles.subTitle}>Cari tahu status kesehatanmu dengan tekan tombol di bawah</AppText>
+        <AppText
+          bold
+          style={styles.title}
+        >{`Selamat Datang di Denmas Slamet`}</AppText>
+        <AppText style={styles.subTitle}>
+          Cari tahu status kesehatanmu dengan tekan tombol di bawah
+        </AppText>
       </View>
       <View style={styles.bottomContent}>
-        <AppButton style={styles.button} onPress={toggleCekKesehatan}>
-          Cek Kesehatan
+        <AppButton
+          style={styles.button}
+          onPress={() => PrinsipScreen.PRINSIP.navigate(navigation)}
+        >
+          Prinsip 3J
         </AppButton>
-        <AppButton style={styles.button} onPress={togglePeriksaStatusGizi}>
-          Periksa Status Gizi
-        </AppButton>
-        <Image source={require('~/assets/images/person-home.png')} style={styles.image}/>
+        <Image
+          source={require("~/assets/images/person-home.png")}
+          style={styles.image}
+        />
       </View>
-      {
-        userData.is_admin ? (
-          <TouchableOpacity
-            style={styles.floatingButton}
-            onPress={() => HealthyScreen.FORM_PMT.navigate(navigation)}
-          >
-            <AppText style={{ color: '#ffffff' }} bold>PMT</AppText>
-          </TouchableOpacity>
-        ) : null
-      }
+      {userData.is_admin && false ? (
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={() => HealthyScreen.FORM_PMT.navigate(navigation)}
+        >
+          <AppText style={{ color: "#ffffff" }} bold>
+            PMT
+          </AppText>
+        </TouchableOpacity>
+      ) : null}
+      <View style={styles.bottomNavigationBar}>
+        <Pressable style={styles.bottomNavButton} onPress={toggleCekKesehatan}>
+          <Stethoscope width={26} height={26} color="black" />
+          <AppText style={styles.bottomNavText}>Periksa</AppText>
+        </Pressable>
+        <Pressable
+          style={styles.bottomNavButton}
+          onPress={togglePeriksaStatusGizi}
+        >
+          <ClinicalFe width={26} height={26} color="black" />
+          <AppText style={styles.bottomNavText}>Status Gizi</AppText>
+        </Pressable>
+        <Pressable
+          style={styles.bottomNavButton}
+          onPress={() => IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)}
+        >
+          <CriticalCare width={26} height={26} color="black" />
+          <AppText style={styles.bottomNavText}>Intervensi</AppText>
+        </Pressable>
+        <Pressable
+          style={styles.bottomNavButton}
+          onPress={() => FaqScreen.FAQ.navigate(navigation)}
+        >
+          <Forum width={26} height={26} color="black" />
+          <AppText style={styles.bottomNavText}>FAQ</AppText>
+        </Pressable>
+      </View>
     </AppView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -122,49 +170,77 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   button: {
-    width: '60%',
+    width: "60%",
     maxWidth: 250,
     elevation: 10,
-    marginTop: 20,
+    marginBottom: 20,
   },
   headerView: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 20,
-    width: '100%',
-    justifyContent: 'space-between',
+    width: "100%",
+    justifyContent: "space-between",
   },
   profile: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   topHeaderText: {
     fontSize: 18,
     paddingLeft: 5,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#ffffff",
   },
   subTitle: {
     fontSize: 11,
-    color: '#ffffff',
+    color: "#ffffff",
   },
   bottomContent: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
-    width: '100%',
-    marginBottom: '-20%',
+    width: "100%",
+    marginBottom: "-20%",
   },
   floatingButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     width: 60,
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
     height: 40,
-    backgroundColor: '#29B6F6',
+    backgroundColor: "#29B6F6",
     borderRadius: 100,
     elevation: 5,
-  }
+  },
+  bottomNavigationBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    right: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: 100,
+    padding: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 15,
+  },
+  bottomNavButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    width: 60,
+    height: 60,
+  },
+  bottomNavText: {
+    fontSize: 10,
+    color: "black",
+  },
 });
