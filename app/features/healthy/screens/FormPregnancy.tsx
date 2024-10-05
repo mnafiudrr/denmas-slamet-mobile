@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     marginTop: 120,
     minHeight: heightScreen - 145,
+    marginHorizontal: 5,
   },
   logo: {
     width: 180,

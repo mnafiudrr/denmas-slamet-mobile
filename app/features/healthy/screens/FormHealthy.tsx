@@ -1,6 +1,6 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import React, { useContext, useRef, useState } from 'react';
-import { Alert, Dimensions, Keyboard, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, Image, Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
@@ -107,21 +107,34 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
   }
 
   return (
-    <AppView withSafeArea withHeader title='Kembali' imageBg={require('~/assets/images/bg-info-kesehatan.png')}>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Informasi Kesehatan</AppText>
+            <AppText style={styles.title} bold>
+              Pemeriksaan
+            </AppText>
+            <AppText
+              style={[styles.label, { marginBottom: 20, textAlign: "center" }]}
+            >
+              {`Masukkan data untuk mengetahui status gizi anda.`}
+            </AppText>
             <View style={styles.warpForm}>
               <AppText style={styles.label}>Tinggi Badan (cm)</AppText>
               <InputForm
                 onSubmitEditing={() => refBeratBadan.current?.onFocus()}
                 returnKeyType="next"
                 style={styles.form}
-                placeholder='Tinggi Badan'
-                keyboardType='numeric'
+                placeholder="Tinggi Badan"
+                keyboardType="numeric"
                 value={data.tinggi_badan}
-                onChangeText={(text: string) => setData({ ...data, tinggi_badan: numberOnly(text) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, tinggi_badan: numberOnly(text) })
+                }
               />
               <AppText style={styles.label}>Berat Badan (kg)</AppText>
               <InputForm
@@ -129,33 +142,53 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                 onSubmitEditing={() => refTekananDarahSistol.current?.onFocus()}
                 returnKeyType="next"
                 style={styles.form}
-                placeholder='Berat Badan'
-                keyboardType='numeric'
+                placeholder="Berat Badan"
+                keyboardType="numeric"
                 value={data.berat_badan}
-                onChangeText={(text: string) => setData({ ...data, berat_badan: numberOnly(text) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, berat_badan: numberOnly(text) })
+                }
               />
               <AppText style={styles.label}>Tekanan Darah (mmHg)</AppText>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <InputForm
                   ref={refTekananDarahSistol}
-                  onSubmitEditing={() => refTekananDarahDiastol.current?.onFocus()}
+                  onSubmitEditing={() =>
+                    refTekananDarahDiastol.current?.onFocus()
+                  }
                   returnKeyType="next"
-                  style={[styles.form, { width: '47%'}]}
-                  placeholder='Sistol'
-                  keyboardType='numeric'
+                  style={[styles.form, { width: "47%" }]}
+                  placeholder="Sistol"
+                  keyboardType="numeric"
                   value={data.tekanan_darah_sistol}
-                  onChangeText={(text: string) => setData({ ...data, tekanan_darah_sistol: numberOnly(text) })}
+                  onChangeText={(text: string) =>
+                    setData({ ...data, tekanan_darah_sistol: numberOnly(text) })
+                  }
                 />
-                <AppText style={{ alignSelf: 'center', fontSize: 40, marginTop: -15 }}>/</AppText>
+                <AppText
+                  style={{ alignSelf: "center", fontSize: 40, marginTop: -15 }}
+                >
+                  /
+                </AppText>
                 <InputForm
                   ref={refTekananDarahDiastol}
                   onSubmitEditing={() => refKadarGula.current?.onFocus()}
                   returnKeyType="next"
-                  style={[styles.form, { width: '47%'}]}
-                  placeholder='Diastol'
-                  keyboardType='numeric'
+                  style={[styles.form, { width: "47%" }]}
+                  placeholder="Diastol"
+                  keyboardType="numeric"
                   value={data.tekanan_darah_diastol}
-                  onChangeText={(text: string) => setData({ ...data, tekanan_darah_diastol: numberOnly(text) })}
+                  onChangeText={(text: string) =>
+                    setData({
+                      ...data,
+                      tekanan_darah_diastol: numberOnly(text),
+                    })
+                  }
                 />
               </View>
               <AppText style={styles.label}>Kadar Gula Darah (mg/dL)</AppText>
@@ -164,10 +197,12 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                 onSubmitEditing={() => refKadarHb.current?.onFocus()}
                 returnKeyType="next"
                 style={styles.form}
-                placeholder='Gula Darah'
-                keyboardType='numeric'
+                placeholder="Gula Darah"
+                keyboardType="numeric"
                 value={data.kadar_gula}
-                onChangeText={(text: string) => setData({ ...data, kadar_gula: numberOnly(text) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, kadar_gula: numberOnly(text) })
+                }
               />
               <AppText style={styles.label}>Kadar HB (g/dL)</AppText>
               <InputForm
@@ -175,10 +210,12 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                 onSubmitEditing={() => refKadarKolesterol.current?.onFocus()}
                 returnKeyType="next"
                 style={styles.form}
-                placeholder='HB'
-                keyboardType='numeric'
+                placeholder="HB"
+                keyboardType="numeric"
                 value={data.kadar_hb}
-                onChangeText={(text: string) => setData({ ...data, kadar_hb: numberOnly(text) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, kadar_hb: numberOnly(text) })
+                }
               />
               <AppText style={styles.label}>Kadar Kolesterol (mg/dL)</AppText>
               <InputForm
@@ -186,10 +223,12 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                 onSubmitEditing={() => refKadarAsamUrat.current?.onFocus()}
                 returnKeyType="next"
                 style={styles.form}
-                placeholder='Kolesterol'
-                keyboardType='numeric'
+                placeholder="Kolesterol"
+                keyboardType="numeric"
                 value={data.kadar_kolesterol}
-                onChangeText={(text: string) => setData({ ...data, kadar_kolesterol: numberOnly(text) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, kadar_kolesterol: numberOnly(text) })
+                }
               />
               <AppText style={styles.label}>Kadar Asam Urat</AppText>
               <InputForm
@@ -199,10 +238,12 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                   toggleNextButton();
                 }}
                 style={styles.form}
-                placeholder='Asam Urat'
-                keyboardType='numeric'
+                placeholder="Asam Urat"
+                keyboardType="numeric"
                 value={data.kadar_asam_urat}
-                onChangeText={(text: string) => setData({ ...data, kadar_asam_urat: numberOnly(text, 1) })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, kadar_asam_urat: numberOnly(text, 1) })
+                }
               />
             </View>
             <AppButton style={styles.button} onPress={toggleNextButton}>
@@ -212,36 +253,40 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: 120,
+    minHeight: heightScreen - 145,
+    marginHorizontal: 5,
+    paddingBottom: 30,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
-    width: '100%',
-    padding: 20,
-    paddingTop: 0,
+    width: "100%",
+    paddingHorizontal: 20,
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
+    marginTop: 20,
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
-    marginBottom: '15%',
+    textAlign: "center",
   },
   warpForm: {
-    marginBottom: 20,
-    padding: 10,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity:  0.1,
-    shadowRadius: 5,
-    elevation: 10,
+    // padding: 10,
   },
   label: {
     fontSize: 15,
@@ -256,11 +301,6 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     elevation: 5,
-  },
-  footer: {
-    bottom: 0,
-  },
-  logo: {
-    width: '100%',
+    marginBottom: 30,
   },
 });
