@@ -52,6 +52,9 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
         'roboto': require('~/assets/fonts/roboto/Roboto-Regular.ttf'),
         'roboto_bold': require('~/assets/fonts/roboto/Roboto-Bold.ttf'),
         'roboto_semibold': require('~/assets/fonts/roboto/Roboto-Medium.ttf'),
+        'poppins': require('~/assets/fonts/poppins/Poppins-Regular.ttf'),
+        'poppins_bold': require('~/assets/fonts/poppins/Poppins-Bold.ttf'),
+        'poppins_semibold': require('~/assets/fonts/poppins/Poppins-Medium.ttf'),
     });
     setfontsLoaded(true);
   };

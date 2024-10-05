@@ -13,7 +13,7 @@ type AppTextProps = TextProps & {
 
 export default function AppText({
   style,
-  font = 'roboto',
+  font = 'poppins',
   semiBold = false,
   bold = false,
   children = '',
