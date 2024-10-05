@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     marginTop: 70,
+    minHeight: heightScreen - 145,
   },
   formBox: {
     width: "100%",
