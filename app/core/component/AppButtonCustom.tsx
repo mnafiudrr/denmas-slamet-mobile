@@ -2,6 +2,7 @@ import React from "react";
 import {
   ImageBackground,
   ImageSourcePropType,
+  Pressable,
   StyleProp,
   TextStyle,
   TouchableOpacity,
@@ -27,17 +28,15 @@ export default function AppButtonCustom({
   imageBg = require("~/assets/images/bg-main.png"),
 }: AppButtonProps) {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+    <Pressable onPress={onPress} style={[styles.container, style]}>
       <ImageBackground
         source={imageBg}
         imageStyle={{ borderRadius: 25 }}
         style={{ width: "100%", height: "100%" }}
       >
-        <View style={[{ flex: 1, padding: 10 }, styleContent]}>
-          {children}
-        </View>
+        <View style={[{ flex: 1, padding: 10 }, styleContent]}>{children}</View>
       </ImageBackground>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
