@@ -95,26 +95,39 @@ const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    minHeight: heightScreen - 35,
+    marginHorizontal: 5,
+    paddingBottom: 30,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
-    width: '100%',
+    width: "100%",
     paddingHorizontal: 20,
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
+    marginTop: 20,
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 15,
   },
   warpForm: {
     marginBottom: 10,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 1, height: 1 },
-    shadowOpacity:  0.1,
+    shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 2,
   },
@@ -129,9 +142,9 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     elevation: 5,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   buttonText: {
-    color: '#29B6F6',
-  }
+    color: "#29B6F6",
+  },
 });

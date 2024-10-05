@@ -1,6 +1,6 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 
@@ -60,15 +60,29 @@ export default function ListData({ route }: { navigation: CompositeNavigationPro
   );
 }
 
+const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    minHeight: heightScreen - 35,
+    marginHorizontal: 5,
+    paddingBottom: 30,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
     width: "100%",
     paddingHorizontal: 20,
     flex: 1,
     overflow: "hidden",
+    marginTop: 20,
   },
   title: {
     fontSize: 25,

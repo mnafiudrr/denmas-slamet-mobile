@@ -1,6 +1,6 @@
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Dimensions, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, Image, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
@@ -156,92 +156,138 @@ export default function StatusGizi({ route }: Props) {
   }
 
   return (
-    <AppView withSafeArea withHeader title='Kembali' imageBg={require('~/assets/images/bg-kehamilan.png')}
-    suffixHeader={
-      <TouchableOpacity onPress={toggleRiwayat}>
-        <AppText style={{ fontSize: 15, fontWeight: 'bold' }}>Riwayat</AppText>
-      </TouchableOpacity>
-    }>
+    <AppView
+      withSafeArea
+      withHeader
+      title="Kembali"
+      suffixHeader={
+        <TouchableOpacity onPress={toggleRiwayat}>
+          <AppText style={{ fontSize: 15, fontWeight: "bold", color: "white" }}>
+            Riwayat
+          </AppText>
+        </TouchableOpacity>
+      }
+    >
       <ScrollView>
         <View style={styles.container}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Periksa Status Gizi</AppText>
+            <AppText style={styles.title} bold>
+              Periksa Status Gizi
+            </AppText>
             <AppText style={styles.label}>Tanggal Lahir</AppText>
             <Pressable onPress={() => setSelectingDate(true)}>
               <InputForm
                 style={styles.form}
-                placeholder='Tanggal Lahir'
-                keyboardType='number-pad'
+                placeholder="Tanggal Lahir"
+                keyboardType="number-pad"
                 value={data.tanggal_lahir}
                 readonly
               />
             </Pressable>
             <AppText style={styles.label}>Jenis Kelamin</AppText>
-            <AppYesNo 
-              value={data.jenis_kelamin === undefined ? undefined : data.jenis_kelamin === 'L'} 
-              onValueChange={(value) => setData({...data, jenis_kelamin: value ? 'L' : 'P'})} 
-              customLabel={{ 
-                yes: 'Laki-laki',
-                no: 'Perempuan',
-                }}
-              style={styles.checkbox}/>
+            <AppYesNo
+              value={
+                data.jenis_kelamin === undefined
+                  ? undefined
+                  : data.jenis_kelamin === "L"
+              }
+              onValueChange={(value) =>
+                setData({ ...data, jenis_kelamin: value ? "L" : "P" })
+              }
+              customLabel={{
+                yes: "Laki-laki",
+                no: "Perempuan",
+              }}
+              style={styles.checkbox}
+            />
             <AppText style={styles.label}>Tinggi Badan (cm)</AppText>
             <InputForm
               style={styles.form}
-              placeholder='Tinggi Badan'
-              keyboardType='number-pad'
+              placeholder="Tinggi Badan"
+              keyboardType="number-pad"
               value={data.tinggi_badan}
-              onChangeText={(text: string) => setData({ ...data, tinggi_badan: numberOnly(text, 1) })}
+              onChangeText={(text: string) =>
+                setData({ ...data, tinggi_badan: numberOnly(text, 1) })
+              }
             />
-            {
-              selectingDate &&
+            {selectingDate && (
               <DateTimePicker
                 value={parseDate(data.tanggal_lahir)}
-                mode='date'
-                display='default'
+                mode="date"
+                display="default"
                 onChange={(event, selectedDate) => {
                   setSelectingDate(false);
-                  setData({ ...data, tanggal_lahir: selectedDate ? formatDate(selectedDate) : data.tanggal_lahir });
+                  setData({
+                    ...data,
+                    tanggal_lahir: selectedDate
+                      ? formatDate(selectedDate)
+                      : data.tanggal_lahir,
+                  });
                 }}
                 maximumDate={new Date()}
                 // minimumDate 61 months ago
-                minimumDate={new Date(new Date().setMonth(new Date().getMonth() - 60))}
+                minimumDate={
+                  new Date(new Date().setMonth(new Date().getMonth() - 60))
+                }
               />
-            }
+            )}
             <AppButton style={styles.button} onPress={togglePeriksa}>
               Periksa
             </AppButton>
-            {
-              result.show &&
+            {result.show && (
               <View style={styles.result}>
                 <View style={styles.resultHeaderView}>
-                  <AppText style={styles.resultTitle} bold>Hasil</AppText>
+                  <AppText style={styles.resultTitle} bold>
+                    Hasil
+                  </AppText>
                 </View>
-                <AppText style={styles.resultText}>Tinggi Badan / Umur (TB/U) :</AppText>
-                <AppText style={[styles.resultStatus, { color: result.color }]}>{ result.status }</AppText>
+                <AppText style={styles.resultText}>
+                  Tinggi Badan / Umur (TB/U) :
+                </AppText>
+                <AppText style={[styles.resultStatus, { color: result.color }]}>
+                  {result.status}
+                </AppText>
               </View>
-            }
+            )}
           </View>
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: 120,
+    minHeight: heightScreen - 145,
+    marginHorizontal: 5,
+    paddingBottom: 30,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
-    width: '100%',
-    padding: 20,
-    paddingTop: 0,
+    width: "100%",
+    paddingHorizontal: 20,
     flex: 1,
+    overflow: "hidden",
+    marginTop: 20,
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
   },
   label: {
@@ -257,44 +303,41 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     elevation: 10,
-    width: '100%',
+    width: "100%",
   },
   footer: {
     bottom: 0,
   },
-  logo: {
-    width: '100%',
-  },
   result: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginTop: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
     borderRadius: 10,
   },
   resultHeaderView: {
-    backgroundColor: 'rgba(0, 153, 255, 0.7)',
-    width: '100%',
+    backgroundColor: "rgba(0, 153, 255, 0.7)",
+    width: "100%",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     marginBottom: 40,
   },
   resultTitle: {
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 10,
     marginTop: 10,
-    color: '#ffffff',
+    color: "#ffffff",
   },
   resultText: {
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 5,
   },
   resultStatus: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 5,
-    fontWeight: 'bold',
-  }
+    fontWeight: "bold",
+  },
 });
