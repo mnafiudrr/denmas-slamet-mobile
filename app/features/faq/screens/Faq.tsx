@@ -100,12 +100,18 @@ const heightScreen = Dimensions.get("screen").height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    minHeight: heightScreen - 45,
   },
   formBox: {
     width: "100%",
     paddingHorizontal: 20,
     flex: 1,
     overflow: "hidden",
+    marginTop: 20,
+    paddingBottom: 40,
   },
   title: {
     fontSize: 20,
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   active: {
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#f3f3f3",
     padding: 10,
   },
   question: {

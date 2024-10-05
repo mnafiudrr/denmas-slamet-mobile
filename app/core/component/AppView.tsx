@@ -1,5 +1,5 @@
 import React from 'react';
-import {ViewStyle, StatusBar, ImageBackground, ImageSourcePropType} from 'react-native';
+import {ViewStyle, StatusBar, ImageBackground, ImageSourcePropType, TextStyle} from 'react-native';
 import ToggleableSafeArea from './ToggleSafeArea';
 import PageHeader from './PageHeader';
 
@@ -9,11 +9,13 @@ export default function AppView({
   title = "",
   style = {},
   styleHeader = {},
+  styleHeaderText = {},
   styleBg = {},
   withSafeArea = false,
   suffixHeader = null,
   backButton,
   imageBg = require("~/assets/images/bg-main.png"),
+  barStyle = "light-content",
 }: {
   children: React.ReactNode;
   withHeader?: boolean;
@@ -23,8 +25,10 @@ export default function AppView({
   styleBg?: ViewStyle;
   imageBg?: ImageSourcePropType | null;
   styleHeader?: ViewStyle;
+  styleHeaderText?: TextStyle;
   suffixHeader?: React.ReactNode;
   backButton?: any | null;
+  barStyle?: "dark-content" | "light-content";
 }) {
   if (!imageBg)
     return (
@@ -33,7 +37,7 @@ export default function AppView({
         style={{ flex: 1, ...style }}
       >
         <StatusBar
-          barStyle="dark-content"
+          barStyle={barStyle}
           translucent
           backgroundColor="transparent"
         />
@@ -44,6 +48,7 @@ export default function AppView({
             style={styleHeader}
             suffix={suffixHeader}
             backButton={backButton}
+            textStyle={styleHeaderText}
           />
         ) : null}
         {children}
@@ -56,7 +61,7 @@ export default function AppView({
         style={{ flex: 1, ...style }}
       >
         <StatusBar
-          barStyle="light-content"
+          barStyle={barStyle}
           translucent
           backgroundColor="transparent"
         />
@@ -67,6 +72,7 @@ export default function AppView({
             style={styleHeader}
             suffix={suffixHeader}
             backButton={backButton}
+            textStyle={styleHeaderText}
           />
         ) : null}
         {children}

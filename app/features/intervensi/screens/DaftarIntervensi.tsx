@@ -1,7 +1,7 @@
 import { CompositeNavigationProp } from "@react-navigation/native";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Dimensions, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Dimensions, ImageBackground, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import AppText from "~/app/core/component/AppText";
 import AppView from "~/app/core/component/AppView";
 import { AuthContext } from "~/app/core/config/AuthContext";
@@ -48,9 +48,19 @@ export default function DaftarIntervensi({
   };
 
   return (
-    <AppView withSafeArea withHeader title="Kembali">
+    <AppView
+      withSafeArea
+      withHeader
+      title="Kembali"
+      imageBg={require("~/assets/images/white.png")}
+      styleHeaderText={{ color: "black" }}
+      barStyle="dark-content"
+    >
       <ScrollView>
-        <View style={styles.container}>
+        <ImageBackground 
+        style={styles.container} 
+        imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+        source={require("~/assets/images/bg-main.png")}>
           <View style={styles.formBox}>
             <AppText style={styles.title} bold>
               Daftar Intervensi
@@ -102,7 +112,7 @@ export default function DaftarIntervensi({
               </View>
             ))}
           </View>
-        </View>
+        </ImageBackground>
       </ScrollView>
     </AppView>
   );
@@ -112,16 +122,23 @@ const heightScreen = Dimensions.get("screen").height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    minHeight: heightScreen - 45,
   },
   formBox: {
     width: "100%",
     paddingHorizontal: 20,
     flex: 1,
     overflow: "hidden",
+    marginTop: 20,
+    paddingBottom: 40,
   },
   title: {
     fontSize: 25,
     textAlign: "center",
     marginBottom: 15,
+    color: "white"
   },
 });
