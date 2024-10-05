@@ -18,12 +18,12 @@ const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerFooter: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
   },
   logo: {
     maxWidth: 200,
@@ -32,12 +32,18 @@ const styles = StyleSheet.create({
   },
   footer: {
     padding: 15,
-    color: 'grey',
-    textAlign: 'center',
+    color: "grey",
+    textAlign: "center",
   },
   loader: {
     marginTop: wp(5),
-  }
+  },
+  denmasSlamet: {
+    width: "75%",
+    height: 30,
+    resizeMode: "contain",
+    tintColor: "white",
+  },
 });
 
 export default function Splash({navigation}: {navigation: CompositeNavigationProp<any, any>}) {
@@ -101,11 +107,21 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
   return (
     <AppView withSafeArea withHeader={false}>
       <View style={styles.container}>
-        <Image style={styles.logo} source={ require('~/assets/images/logo.png') }/>
-        <AppText bold>Denmas Slamet</AppText>
+        <Image
+          style={styles.logo}
+          source={require("~/assets/images/logo-new.png")}
+        />
+        <Image
+          source={require("~/assets/images/denmas-slamet.png")}
+          style={styles.denmasSlamet}
+        />
       </View>
       <View style={styles.containerFooter}>
-        <ActivityIndicator style={[styles.loader, styles.footer]} size={'small'} color={'grey'} />
+        <ActivityIndicator
+          style={[styles.loader, styles.footer]}
+          size={"small"}
+          color={"grey"}
+        />
       </View>
     </AppView>
   );
