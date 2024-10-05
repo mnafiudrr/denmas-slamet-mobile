@@ -1,6 +1,6 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
-import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import ResultScreen from '../../result/config/Screens';
@@ -9,6 +9,7 @@ import axios from 'axios';
 import { REPORT_PATH } from '~/app/service/ApiServices';
 import { AuthContext } from '~/app/core/config/AuthContext';
 import { formatDate } from '~/app/core/utils/formatter';
+import AppButtonCustom from '~/app/core/component/AppButtonCustom';
 
 type Props = {
   route: any,
@@ -105,12 +106,23 @@ export default function History({ navigation, route }: { navigation: CompositeNa
 
   return (
     <AppView withSafeArea withHeader title="Kembali">
-      <ScrollView>
+      <ScrollView style={styles.scrollview}>
         <View style={styles.container}>
+          <AppButtonCustom
+            style={styles.header}
+            styleContent={styles.headerContent}
+          >
+            <View style={styles.headerLeftArea}>
+              <AppText bold style={styles.title}>
+                Prinsip 3J
+              </AppText>
+            </View>
+            <Image
+              source={require("~/assets/images/food.png")}
+              style={styles.headerRightArea}
+            />
+          </AppButtonCustom>
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>
-              Riwayat
-            </AppText>
             {data.map((item, index) => (
               <Pressable
                 key={index}
@@ -136,19 +148,51 @@ export default function History({ navigation, route }: { navigation: CompositeNa
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
+  scrollview: {
+  },
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: 70,
+    minHeight: heightScreen - 145,
   },
   formBox: {
     width: "100%",
     paddingHorizontal: 20,
     flex: 1,
     overflow: "hidden",
+    marginTop: 20,
+  },
+  header: {
+    width: "90%",
+    maxWidth: 450,
+    elevation: 10,
+    height: 130,
+    marginTop: -60,
+  },
+  headerContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+  headerLeftArea: {
+    flex: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  headerRightArea: {
+    width: 130,
+    height: 130,
+    marginRight: -30,
   },
   title: {
     fontSize: 25,
     textAlign: "center",
     marginBottom: 15,
+    color: "white",
   },
   warpForm: {
     marginBottom: 10,
