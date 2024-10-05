@@ -56,7 +56,7 @@ export default function AppView({
         style={{ flex: 1, ...style }}
       >
         <StatusBar
-          barStyle="dark-content"
+          barStyle="light-content"
           translucent
           backgroundColor="transparent"
         />

@@ -84,7 +84,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
   return (
     <AppView withSafeArea>
       <ScrollView>
-        <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10 }}>
+        <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10, color: "white" }}>
           Version 1.4.0{" "}
         </AppText>
         <View style={styles.container}>

@@ -78,73 +78,90 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
   }
 
   return (
-    <AppView withSafeArea withHeader title='Masuk'>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Daftar</AppText>
             <AppText style={styles.label}>Nama</AppText>
-            <InputForm 
-              placeholder="Nama" 
+            <InputForm
+              placeholder="Nama"
               onSubmitEditing={() => refPhone.current?.onFocus()}
               returnKeyType="next"
-              value={data.name} 
-              onChangeText={(value) => setData({...data, name: value})} 
-              style={styles.form}/>
+              value={data.name}
+              onChangeText={(value) => setData({ ...data, name: value })}
+              style={styles.form}
+            />
             <AppText style={styles.label}>No HP</AppText>
-            <InputForm 
+            <InputForm
               ref={refPhone}
-              placeholder="No HP" 
+              placeholder="No HP"
               onSubmitEditing={() => refUsername.current?.onFocus()}
               returnKeyType="next"
-              keyboardType='numeric'
-              value={data.phone} 
-              onChangeText={(value) => setData({...data, phone: value})} 
-              style={styles.form}/>
+              keyboardType="numeric"
+              value={data.phone}
+              onChangeText={(value) => setData({ ...data, phone: value })}
+              style={styles.form}
+            />
             <AppText style={styles.label}>Username</AppText>
-            <InputForm 
+            <InputForm
               ref={refUsername}
-              placeholder="Username" 
+              placeholder="Username"
               onSubmitEditing={() => refPassword.current?.onFocus()}
               returnKeyType="next"
-              value={data.username} 
-              onChangeText={(value) => setData({...data, username: value})} 
-              style={styles.form}/>
+              value={data.username}
+              onChangeText={(value) => setData({ ...data, username: value })}
+              style={styles.form}
+            />
             <AppText style={styles.label}>Password</AppText>
-            <View style={{ flexDirection:'row', alignItems: 'center' }}>
-              <InputForm 
-                placeholder="Password" 
-                value={data.password} 
-                onChangeText={(value) => setData({...data, password: value})} 
-                style={styles.form} 
-                ref={refPassword} 
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <InputForm
+                placeholder="Password"
+                value={data.password}
+                onChangeText={(value) => setData({ ...data, password: value })}
+                style={styles.form}
+                ref={refPassword}
                 secureTextEntry={!showPassword}
               />
               <Pressable onPress={() => setShowPassword(!showPassword)}>
-                <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="black" style={{ marginTop: -8, marginLeft: -35 }} />
+                <Ionicons
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={24}
+                  color="black"
+                  style={{ marginTop: -8, marginLeft: -35 }}
+                />
               </Pressable>
             </View>
             <AppButton style={styles.button} onPress={toggleSignUp}>
               Daftar
             </AppButton>
           </View>
-          <View style={styles.footer}>
-            <Image source={require('~/assets/images/person-signup.png')} style={styles.logo} />
-          </View>
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // height: heightScreen-20,
+    alignItems: "center",
+    marginTop: 140,
+    marginHorizontal: 20,
+    backgroundColor: "white",
+    height: heightScreen - 350,
+    borderRadius: 40,
+  },
+  logo: {
+    maxWidth: 180,
+    maxHeight: 180,
+    marginTop: -120,
   },
   formBox: {
-    width: '100%',
+    width: "100%",
     padding: 20,
     flex: 1,
   },
@@ -164,8 +181,5 @@ const styles = StyleSheet.create({
   },
   footer: {
     bottom: 0,
-  },
-  logo: {
-    width: '100%',
   },
 });

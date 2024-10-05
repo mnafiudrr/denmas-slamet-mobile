@@ -11,7 +11,7 @@ export default function PageHeader({
   title = '',
   style = {},
   textStyle = {},
-  iconColor = AppColors.black,
+  iconColor = AppColors.white,
   withSafeArea = false,
   suffix = null,
   backButton,
@@ -38,7 +38,9 @@ export default function PageHeader({
           <AppText
             semiBold
             style={{
-              marginLeft: 10, ...textStyle,
+              marginLeft: 10, 
+              color: iconColor,
+              ...textStyle,
             }}
           >
             {title??'Kembali'}
