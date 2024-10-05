@@ -1,4 +1,4 @@
-import { View, Alert, StyleSheet, Image, BackHandler, Pressable, TouchableOpacity } from 'react-native';
+import { View, Alert, StyleSheet, Image, BackHandler, Pressable, TouchableOpacity, ImageBackground } from 'react-native';
 import React, { useContext } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
@@ -17,6 +17,7 @@ import PrinsipScreen from '../../prinsip/config/Screens';
 import FaqScreen from '../../faq/config/Screens';
 import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
 import IntervensiScreen from '../../intervensi/config/Screens';
+import AppButtonCustom from '~/app/core/component/AppButtonCustom';
 
 export default function Home({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
   
@@ -84,14 +85,14 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
   }
 
   return (
-    <AppView withSafeArea imageBg={require("~/assets/images/bg-home.png")}>
+    <AppView withSafeArea>
       <View style={styles.container}>
         <View style={styles.headerView}>
           <Pressable
             style={styles.profile}
             onPress={() => ProfileScreen.PROFILE.navigate(navigation)}
           >
-            <Ionicons name="person-circle" size={24} color="black" />
+            <Ionicons name="person-circle" size={24} color="white" />
             <AppText bold style={styles.topHeaderText}>
               {userData.fullname}
             </AppText>
@@ -99,29 +100,42 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
           <MaterialIcons
             name="history"
             size={24}
-            color="black"
+            color="white"
             onPress={toggleRiwayat}
           />
         </View>
-        <AppText
-          bold
-          style={styles.title}
-        >{`Selamat Datang di Denmas Slamet`}</AppText>
-        <AppText style={styles.subTitle}>
-          Cari tahu status kesehatanmu dengan tekan tombol di bawah
-        </AppText>
-      </View>
-      <View style={styles.bottomContent}>
-        <AppButton
-          style={styles.button}
-          onPress={() => PrinsipScreen.PRINSIP.navigate(navigation)}
-        >
-          Prinsip 3J
-        </AppButton>
-        <Image
-          source={require("~/assets/images/person-home.png")}
-          style={styles.image}
-        />
+        <View style={styles.mainContent}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
+          <Image
+            source={require("~/assets/images/denmas-slamet.png")}
+            style={styles.denmasSlamet}
+          />
+          <AppText style={styles.subTitle}>
+            Menjaga kesehatan adalah investasi terbaik untuk masa depan, Cek
+            status kesehatanmu sekarang!
+          </AppText>
+          <AppButtonCustom
+            style={styles.button}
+            styleContent={styles.buttonContent}
+            onPress={() => PrinsipScreen.PRINSIP.navigate(navigation)}
+          >
+            <View style={styles.buttonLeftArea}>
+              <AppText bold style={styles.title}>
+                Prinsip 3J
+              </AppText>
+              <AppText bold style={styles.buttonSubtitle}>
+                Prinsip pengaturan makan pada penderita Diabetes Melitus
+              </AppText>
+            </View>
+            <Image 
+              source={require("~/assets/images/food.png")}
+              style={styles.buttonRightArea} 
+            />
+          </AppButtonCustom>
+        </View>
       </View>
       {userData.is_admin && false ? (
         <TouchableOpacity
@@ -133,33 +147,39 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
           </AppText>
         </TouchableOpacity>
       ) : null}
-      <View style={styles.bottomNavigationBar}>
+      <ImageBackground
+        source={require("~/assets/images/bg-main.png")}
+        imageStyle={{ borderRadius: 15 }}
+        style={styles.bottomNavigationBar}
+      >
         <Pressable style={styles.bottomNavButton} onPress={toggleCekKesehatan}>
-          <Stethoscope width={26} height={26} color="black" />
+          <Stethoscope width={26} height={26} color="white" />
           <AppText style={styles.bottomNavText}>Periksa</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={togglePeriksaStatusGizi}
         >
-          <ClinicalFe width={26} height={26} color="black" />
+          <ClinicalFe width={26} height={26} color="white" />
           <AppText style={styles.bottomNavText}>Status Gizi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
-          onPress={() => IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)}
+          onPress={() =>
+            IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)
+          }
         >
-          <CriticalCare width={26} height={26} color="black" />
+          <CriticalCare width={26} height={26} color="white" />
           <AppText style={styles.bottomNavText}>Intervensi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={() => FaqScreen.FAQ.navigate(navigation)}
         >
-          <Forum width={26} height={26} color="black" />
+          <Forum width={26} height={26} color="white" />
           <AppText style={styles.bottomNavText}>FAQ</AppText>
         </Pressable>
-      </View>
+      </ImageBackground>
     </AppView>
   );
 }
@@ -167,19 +187,31 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
   },
   button: {
-    width: "60%",
-    maxWidth: 250,
+    width: "90%",
+    maxWidth: 450,
     elevation: 10,
-    marginBottom: 20,
+    height: 130,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+  buttonLeftArea: {
+    flex: 3,
+  },
+  buttonRightArea: {
+    width: 130,
+    height: 130,
+    marginRight: -30,
   },
   headerView: {
     flexDirection: "row",
-    marginBottom: 20,
     width: "100%",
     justifyContent: "space-between",
+    padding: 20,
   },
   profile: {
     flexDirection: "row",
@@ -187,15 +219,43 @@ const styles = StyleSheet.create({
   topHeaderText: {
     fontSize: 18,
     paddingLeft: 5,
+    color: "#ffffff",
+  },
+  mainContent: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 20,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: 100,
+  },
+  logo: {
+    maxWidth: 180,
+    maxHeight: 180,
+    marginTop: -120,
+    alignSelf: "center",
+  },
+  denmasSlamet: {
+    width: "100%",
+    height: 30,
+    resizeMode: "contain",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#ffffff",
   },
+  buttonSubtitle: {
+    fontSize: 11,
+    color: "black",
+    paddingRight: 30,
+  },
   subTitle: {
     fontSize: 11,
-    color: "#ffffff",
+    color: "gray",
+    paddingHorizontal: 50,
+    textAlign: "center",
+    marginBottom: 30,
   },
   bottomContent: {
     alignItems: "center",
@@ -241,6 +301,6 @@ const styles = StyleSheet.create({
   },
   bottomNavText: {
     fontSize: 10,
-    color: "black",
+    color: "white",
   },
 });

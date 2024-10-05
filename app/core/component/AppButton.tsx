@@ -1,21 +1,25 @@
 import React from 'react';
-import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { ImageBackground, ImageSourcePropType, StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import AppText from './AppText';
 import { StyleSheet } from 'react-native';
 
 type AppButtonProps = {
-  children?: React.ReactNode,
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
-  textStyle?: StyleProp<TextStyle>,
-}
+  children?: React.ReactNode;
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  imageBg?: ImageSourcePropType | undefined;
+};
 
-export default function AppButton({children, onPress, style, textStyle}: AppButtonProps) {
+export default function AppButton({children, onPress, style, textStyle, 
+  imageBg = require("~/assets/images/bg-main.png")}: AppButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-      <AppText bold style={[styles.text, textStyle]}>
-        {children}
-      </AppText>
+      <ImageBackground source={imageBg} imageStyle={{ borderRadius: 25 }}>
+        <AppText bold style={[styles.text, textStyle]}>
+          {children}
+        </AppText>
+      </ImageBackground>
     </TouchableOpacity>
   );
 }
