@@ -82,19 +82,23 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
   }
 
   return (
-    <AppView withSafeArea imageBg={require("~/assets/images/bg-login.png")}>
+    <AppView withSafeArea>
       <ScrollView>
         <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10 }}>
-          Version 1.3.0{" "}
+          Version 1.4.0{" "}
         </AppText>
         <View style={styles.container}>
           <Image
-            source={require("~/assets/images/logo.png")}
+            source={require("~/assets/images/logo-new.png")}
             style={styles.logo}
           />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>
-              Masuk
+            <Image
+              source={require("~/assets/images/selamat-datang.png")}
+              style={styles.selamatDatang}
+            />
+            <AppText style={styles.subtitle}>
+              {`Masukkan username dan\npassword anda untuk masuk`}
             </AppText>
             <AppText style={styles.label}>Username / No HP</AppText>
             <InputForm
@@ -128,17 +132,16 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
             <AppButton style={styles.button} onPress={toggleLogin}>
               Masuk
             </AppButton>
-            {/* <AppText style={{ alignSelf: 'center' }}>Don't have account?</AppText> */}
           </View>
+          <Pressable
+            style={styles.floatingButton}
+            onPress={() => navigation.navigate("Auth/Signup")}
+          >
+            <AppText style={styles.footer} bold>
+              Daftar
+            </AppText>
+          </Pressable>
         </View>
-        <Pressable
-          style={styles.floatingButton}
-          onPress={() => navigation.navigate("Auth/Signup")}
-        >
-          <AppText style={styles.footer} bold>
-            Daftar
-          </AppText>
-        </Pressable>
       </ScrollView>
     </AppView>
   );
@@ -146,26 +149,33 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
-    // justifyContent: 'center',
-    paddingTop: "35%",
-    // backgroundColor: 'red',
-    height: heightScreen - 80,
+    marginTop: 140,
+    marginHorizontal: 20,
+    backgroundColor: 'white',
+    height: heightScreen - 350,
+    borderRadius: 40
   },
   logo: {
+    maxWidth: 180,
+    maxHeight: 180,
+    marginTop: -120
+  },
+  selamatDatang: { 
+    resizeMode: "cover",
     maxWidth: 200,
-    maxHeight: 200,
-    backgroundColor: "white",
-    borderRadius: 100,
+    height: 50,
+    marginLeft: -10,
   },
   formBox: {
     width: "100%",
     padding: 20,
   },
-  title: {
-    fontSize: 25,
+  subtitle: {
+    fontSize: 12,
     marginBottom: 20,
+    marginTop: -10,
+    color: "gray",
   },
   label: {
     fontSize: 15,
@@ -178,15 +188,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   footer: {
-    color: "#29B6F6",
+    color: "black",
   },
   floatingButton: {
     alignItems: "center",
     justifyContent: "center",
     width: 60,
     position: "absolute",
-    bottom: 20,
-    right: 20,
+    bottom: 15,
+    right: 15,
     height: 20,
     borderRadius: 100
   },
