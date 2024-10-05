@@ -1,6 +1,6 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
-import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import { showLoading } from '~/app/core/utils/loader';
@@ -134,72 +134,100 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
   }
 
   return (
-    <AppView withSafeArea>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Profil</AppText>
+            <AppText style={styles.title} bold>
+              {`PROFILE`}
+            </AppText>
             <View style={styles.warpForm}>
               <AppText style={styles.label}>Nama</AppText>
               <InputForm
                 style={styles.form}
-                placeholder='Nama'
+                placeholder="Nama"
                 value={data.fullname}
-                onChangeText={(text: string) => setData({ ...data, fullname: text })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, fullname: text })
+                }
               />
               <AppText style={styles.label}>Alamat</AppText>
               <InputForm
                 style={styles.form}
-                placeholder='Alamat'
+                placeholder="Alamat"
                 value={data.address}
-                onChangeText={(text: string) => setData({ ...data, address: text })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, address: text })
+                }
               />
               <AppText style={styles.label}>Tempat Lahir</AppText>
               <InputForm
                 style={styles.form}
-                placeholder='Tempat Lahir'
+                placeholder="Tempat Lahir"
                 value={data.birthplace}
-                onChangeText={(text: string) => setData({ ...data, birthplace: text })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, birthplace: text })
+                }
               />
               <AppText style={styles.label}>Tanggal Lahir</AppText>
               <Pressable onPress={() => setSelectingDate(true)}>
                 <InputForm
                   style={styles.form}
-                  placeholder='Tanggal Lahir'
-                  keyboardType='number-pad'
-                  value={data.birthday} 
+                  placeholder="Tanggal Lahir"
+                  keyboardType="number-pad"
+                  value={data.birthday}
                   readonly
                 />
               </Pressable>
               <AppText style={styles.label}>Riwayat Kesehatan Dahulu</AppText>
               <InputForm
                 style={styles.form}
-                placeholder='Riwayat kesehatan dahulu'
+                placeholder="Riwayat kesehatan dahulu"
                 value={data.riwayat_kesehatan_dahulu}
-                onChangeText={(text: string) => setData({ ...data, riwayat_kesehatan_dahulu: text })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, riwayat_kesehatan_dahulu: text })
+                }
               />
               <AppText style={styles.label}>Riwayat Kesehatan Keluarga</AppText>
               <InputForm
                 style={styles.form}
-                placeholder='Riwayat kesehatan keluarga'
+                placeholder="Riwayat kesehatan keluarga"
                 value={data.riwayat_kesehatan_keluarga}
-                onChangeText={(text: string) => setData({ ...data, riwayat_kesehatan_keluarga: text })}
+                onChangeText={(text: string) =>
+                  setData({ ...data, riwayat_kesehatan_keluarga: text })
+                }
               />
-              {
-                selectingDate &&
-                  <DateTimePicker
-                    value={parseDate(data.birthday)}
-                    mode='date'
-                    display='default'
-                    onChange={(event, selectedDate) => {
-                      setSelectingDate(false);
-                      setData({ ...data, birthday: selectedDate ? formatDate(selectedDate) : data.birthday });
-                    }}
-                    // maximum date 5 years ago, and minimum date 70 years ago
-                    maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 5))}
-                    minimumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 70))}
-                  />
-              }
+              {selectingDate && (
+                <DateTimePicker
+                  value={parseDate(data.birthday)}
+                  mode="date"
+                  display="default"
+                  onChange={(event, selectedDate) => {
+                    setSelectingDate(false);
+                    setData({
+                      ...data,
+                      birthday: selectedDate
+                        ? formatDate(selectedDate)
+                        : data.birthday,
+                    });
+                  }}
+                  // maximum date 5 years ago, and minimum date 70 years ago
+                  maximumDate={
+                    new Date(
+                      new Date().setFullYear(new Date().getFullYear() - 5)
+                    )
+                  }
+                  minimumDate={
+                    new Date(
+                      new Date().setFullYear(new Date().getFullYear() - 70)
+                    )
+                  }
+                />
+              )}
             </View>
             <AppButton style={styles.button} onPress={save}>
               Simpan
@@ -208,35 +236,39 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    alignItems: "center",
+    marginTop: 140,
+    marginHorizontal: 20,
+    backgroundColor: "white",
+    borderRadius: 40,
+    height: 610,
+    marginBottom: 40,
+  },
+  logo: {
+    maxWidth: 180,
+    maxHeight: 180,
+    marginTop: -120,
   },
   formBox: {
-    width: '100%',
+    width: "100%",
     padding: 20,
+    paddingTop: 0,
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
-    marginBottom: 15,
+    marginLeft: 10,
   },
   warpForm: {
     marginBottom: 20,
     padding: 10,
-    // backgroundColor: '#f5f5f5',
-    // borderRadius: 10,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 1, height: 1 },
-    // shadowOpacity:  0.1,
-    // shadowRadius: 5,
-    // elevation: 10,
   },
   label: {
     fontSize: 15,
@@ -247,11 +279,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    marginTop: 20,
     elevation: 5,
   },
   buttonText: {
-    color: '#29B6F6',
+    color: "#29B6F6",
   },
   form: {
     marginBottom: 10,
