@@ -1,6 +1,6 @@
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Alert, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import AppButton from '~/app/core/component/AppButton';
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
@@ -74,34 +74,98 @@ export default function FormPregnancy({ route }: Props) {
   }
 
   return (
-    <AppView withSafeArea withHeader title='Kembali' imageBg={require('~/assets/images/bg-kehamilan.png')}>
+    <AppView withSafeArea withHeader title="Kembali">
       <ScrollView>
         <View style={styles.container}>
+          <Image
+            source={require("~/assets/images/logo-new.png")}
+            style={styles.logo}
+          />
           <View style={styles.formBox}>
-            <AppText style={styles.title} bold>Kehamilan</AppText>
+            <AppText style={styles.title} bold>
+              Kehamilan
+            </AppText>
+            <AppText style={[styles.label, { marginBottom: 20, textAlign: 'center' }]}>
+              {`Masukkan data untuk mengetahui status gizi anda.`}
+            </AppText>
             <AppText style={styles.label}>Apakah anda sedang hamil?</AppText>
-            <AppYesNo value={data.hamil} onValueChange={(value) => setData({...data, hamil: value})} style={styles.checkbox}/>
+            <AppYesNo
+              value={data.hamil}
+              onValueChange={(value) => setData({ ...data, hamil: value })}
+              style={styles.checkbox}
+            />
             <Visible visible={!!data.hamil}>
               <>
-                <AppText style={styles.label}>Berapa usia kehamilan anda?</AppText>
-                <InputForm 
+                <AppText style={styles.label}>
+                  Berapa usia kehamilan anda?
+                </AppText>
+                <InputForm
                   placeholder="Minggu ke-"
-                  value={data.usia_kehamilan} 
-                  keyboardType='number-pad'
-                  onChangeText={(value) => setData({...data, usia_kehamilan: numberOnly(value)})} 
-                  style={styles.form}/>
-                <AppText style={styles.label}>{`Apakah anda mengalami mual? (>2x Sepekan)`}</AppText>
-                <AppYesNo value={data.muntah} onValueChange={(value) => setData({...data, muntah: value})} style={styles.checkbox}/>
-                <AppText style={styles.label}>{`Apakah anda tidak merasakan janin bergerak?`}</AppText>
-                <AppYesNo value={data.janin_pasif} onValueChange={(value) => setData({...data, janin_pasif: value})} style={styles.checkbox}/>
-                <AppText style={styles.label}>{`Apakah Anda pernah merasakan keluar bercak darah dari daerah vagina?`}</AppText>
-                <AppYesNo value={data.pendarahan} onValueChange={(value) => setData({...data, pendarahan: value})} style={styles.checkbox}/>
-                <AppText style={styles.label}>{`Apakah Anda merasakan kaki nyeri atau bengkak?`}</AppText>
-                <AppYesNo value={data.bengkak} onValueChange={(value) => setData({...data, bengkak: value})} style={styles.checkbox}/>
-                <AppText style={styles.label}>{`Apakah Anda merasakan sembelit?`}</AppText>
-                <AppYesNo value={data.sembelit} onValueChange={(value) => setData({...data, sembelit: value})} style={styles.checkbox}/>
-                <AppText style={styles.label}>{`Apakah Anda merasakan nyeri ketika buang air kecil?`}</AppText>
-                <AppYesNo value={data.nyeri_bak} onValueChange={(value) => setData({...data, nyeri_bak: value})} style={styles.checkbox}/>
+                  value={data.usia_kehamilan}
+                  keyboardType="number-pad"
+                  onChangeText={(value) =>
+                    setData({ ...data, usia_kehamilan: numberOnly(value) })
+                  }
+                  style={styles.form}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah anda mengalami mual? (>2x Sepekan)`}</AppText>
+                <AppYesNo
+                  value={data.muntah}
+                  onValueChange={(value) => setData({ ...data, muntah: value })}
+                  style={styles.checkbox}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah anda tidak merasakan janin bergerak?`}</AppText>
+                <AppYesNo
+                  value={data.janin_pasif}
+                  onValueChange={(value) =>
+                    setData({ ...data, janin_pasif: value })
+                  }
+                  style={styles.checkbox}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah Anda pernah merasakan keluar bercak darah dari daerah vagina?`}</AppText>
+                <AppYesNo
+                  value={data.pendarahan}
+                  onValueChange={(value) =>
+                    setData({ ...data, pendarahan: value })
+                  }
+                  style={styles.checkbox}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah Anda merasakan kaki nyeri atau bengkak?`}</AppText>
+                <AppYesNo
+                  value={data.bengkak}
+                  onValueChange={(value) =>
+                    setData({ ...data, bengkak: value })
+                  }
+                  style={styles.checkbox}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah Anda merasakan sembelit?`}</AppText>
+                <AppYesNo
+                  value={data.sembelit}
+                  onValueChange={(value) =>
+                    setData({ ...data, sembelit: value })
+                  }
+                  style={styles.checkbox}
+                />
+                <AppText
+                  style={styles.label}
+                >{`Apakah Anda merasakan nyeri ketika buang air kecil?`}</AppText>
+                <AppYesNo
+                  value={data.nyeri_bak}
+                  onValueChange={(value) =>
+                    setData({ ...data, nyeri_bak: value })
+                  }
+                  style={styles.checkbox}
+                />
               </>
             </Visible>
             <AppButton style={styles.button} onPress={toggleNextButton}>
@@ -111,24 +175,35 @@ export default function FormPregnancy({ route }: Props) {
         </View>
       </ScrollView>
     </AppView>
-  )
+  );
 }
 
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: 120,
+    minHeight: heightScreen - 145,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
-    width: '100%',
-    padding: 20,
-    paddingTop: 0,
+    width: "100%",
+    paddingHorizontal: 20,
     flex: 1,
+    overflow: "hidden",
+    marginTop: 20,
   },
   title: {
     fontSize: 25,
-    textAlign: 'center',
-    marginBottom: 20,
+    textAlign: "center",
   },
   label: {
     fontSize: 15,
@@ -142,12 +217,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+    marginBottom: 40,
     elevation: 10,
   },
   footer: {
     bottom: 0,
-  },
-  logo: {
-    width: '100%',
   },
 });

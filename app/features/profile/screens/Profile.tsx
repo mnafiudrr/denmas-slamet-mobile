@@ -251,8 +251,8 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   logo: {
-    maxWidth: 180,
-    maxHeight: 180,
+    width: 180,
+    height: 180,
     marginTop: -120,
   },
   formBox: {
