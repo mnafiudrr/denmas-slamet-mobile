@@ -85,7 +85,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
     <AppView withSafeArea>
       <ScrollView>
         <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10, color: "white" }}>
-          Version 1.4.0{" "}
+          Version 2.0.1{" "}
         </AppText>
         <View style={styles.container}>
           <Image
@@ -149,27 +149,35 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    marginTop: 140,
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    marginTop: 120,
+    marginBottom: 30,
     marginHorizontal: 20,
-    backgroundColor: 'white',
-    height: heightScreen - 350,
-    borderRadius: 40
+    paddingBottom: 30,
   },
   logo: {
-    maxWidth: 180,
-    maxHeight: 180,
-    marginTop: -120
+    width: 180,
+    height: 180,
+    marginTop: -120,
+    alignSelf: "center",
   },
-  selamatDatang: { 
+  formBox: {
+    width: "100%",
+    paddingHorizontal: 20,
+    flex: 1,
+    overflow: "hidden",
+    marginTop: 10,
+  },
+  selamatDatang: {
     resizeMode: "cover",
     maxWidth: 200,
     height: 50,
     marginLeft: -10,
-  },
-  formBox: {
-    width: "100%",
-    padding: 20,
   },
   subtitle: {
     fontSize: 12,
@@ -186,6 +194,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+    marginBottom: 40,
   },
   footer: {
     color: "black",
@@ -198,6 +207,6 @@ const styles = StyleSheet.create({
     bottom: 15,
     right: 15,
     height: 20,
-    borderRadius: 100
+    borderRadius: 100,
   },
 });

@@ -4,6 +4,7 @@ import { Dimensions, Image, Pressable, ScrollView, StyleSheet, View } from 'reac
 import AppText from '~/app/core/component/AppText';
 import AppView from '~/app/core/component/AppView';
 import ResultScreen from '../../result/config/Screens';
+import { MaterialIcons } from "@expo/vector-icons"; 
 import { showLoading } from '~/app/core/utils/loader';
 import axios from 'axios';
 import { REPORT_PATH } from '~/app/service/ApiServices';
@@ -114,13 +115,17 @@ export default function History({ navigation, route }: { navigation: CompositeNa
           >
             <View style={styles.headerLeftArea}>
               <AppText bold style={styles.title}>
-                Prinsip 3J
+                Riwayat
               </AppText>
             </View>
-            <Image
-              source={require("~/assets/images/food.png")}
-              style={styles.headerRightArea}
-            />
+            <View style={styles.headerRightArea}>
+              <MaterialIcons
+                name="history"
+                size={110}
+                color="black"
+                style={{ marginLeft: -1 }}
+              />
+            </View>
           </AppButtonCustom>
           <View style={styles.formBox}>
             {data.map((item, index) => (
@@ -187,6 +192,9 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     marginRight: -30,
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 130,
   },
   title: {
     fontSize: 25,

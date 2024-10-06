@@ -148,22 +148,29 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
 const heightScreen = Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    marginTop: 140,
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    marginTop: 120,
+    marginBottom: 30,
     marginHorizontal: 20,
-    backgroundColor: "white",
-    height: heightScreen - 350,
-    borderRadius: 40,
+    paddingBottom: 30,
   },
   logo: {
-    maxWidth: 180,
-    maxHeight: 180,
+    width: 180,
+    height: 180,
     marginTop: -120,
+    alignSelf: "center",
   },
   formBox: {
     width: "100%",
-    padding: 20,
+    paddingHorizontal: 20,
     flex: 1,
+    overflow: "hidden",
+    marginTop: 10,
   },
   title: {
     fontSize: 25,

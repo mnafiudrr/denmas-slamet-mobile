@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   question: {
+    flex: 1,
     fontSize: 15,
     padding: 10,
     flexDirection: "row",
@@ -145,6 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   questionText: {
+    flex: 1,
     fontSize: 15,
     fontWeight: "bold",
   },

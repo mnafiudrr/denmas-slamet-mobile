@@ -247,7 +247,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     backgroundColor: "white",
     borderRadius: 40,
-    height: 610,
     marginBottom: 40,
   },
   logo: {
