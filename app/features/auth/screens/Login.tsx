@@ -85,7 +85,7 @@ export default function Login({ navigation }: { navigation: CompositeNavigationP
     <AppView withSafeArea>
       <ScrollView>
         <AppText style={{ fontSize: 12, textAlign: "right", marginRight: 10, color: "white" }}>
-          Version 2.0.1{" "}
+          Version 2.0.3{" "}
         </AppText>
         <View style={styles.container}>
           <Image

@@ -171,7 +171,7 @@ export default function FormHealthy({ navigation, route }: { navigation: Composi
                   }
                 />
                 <AppText
-                  style={{ alignSelf: "center", fontSize: 40, marginTop: -15 }}
+                  style={{ alignSelf: "center", fontSize: 30, marginTop: 0 }}
                 >
                   /
                 </AppText>

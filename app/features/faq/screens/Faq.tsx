@@ -1,7 +1,7 @@
 import { CompositeNavigationProp } from "@react-navigation/native";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Dimensions, Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Dimensions, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import AppText from "~/app/core/component/AppText";
 import AppView from "~/app/core/component/AppView";
 import { AuthContext } from "~/app/core/config/AuthContext";
@@ -159,5 +159,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+    textAlign: "justify",
   },
 });

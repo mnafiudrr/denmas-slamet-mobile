@@ -31,7 +31,7 @@ export default function AppButtonCustom({
     <Pressable onPress={onPress} style={[styles.container, style]}>
       <ImageBackground
         source={imageBg}
-        imageStyle={{ borderRadius: 25 }}
+        imageStyle={{ borderRadius: 15 }}
         style={{ width: "100%", height: "100%" }}
       >
         <View style={[{ flex: 1, padding: 10 }, styleContent]}>{children}</View>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     backgroundColor: "#29B6F6",
-    borderRadius: 25,
+    borderRadius: 15,
     justifyContent: "center",
     alignSelf: "center"
   },

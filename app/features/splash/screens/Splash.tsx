@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    maxWidth: 200,
-    maxHeight: 200,
-    // backgroundColor: 'red',
+    maxWidth: 150,
+    maxHeight: 150,
+    marginBottom: 20,
   },
   footer: {
     padding: 15,
@@ -120,7 +120,7 @@ export default function Splash({navigation}: {navigation: CompositeNavigationPro
         <ActivityIndicator
           style={[styles.loader, styles.footer]}
           size={"small"}
-          color={"grey"}
+          color={"white"}
         />
       </View>
     </AppView>
