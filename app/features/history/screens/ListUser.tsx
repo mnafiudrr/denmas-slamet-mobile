@@ -66,7 +66,10 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
     if (access_type === 'history') {
       HistoryScreen.HISTORY.navigate(navigation, { profile_id: id });
     } else if (access_type === 'healthy') {
-      HealthyScreen.FORM_PREGNANCY.navigate(navigation, { profile_id: id });
+      HealthyScreen.FORM_PREGNANCY.navigate(navigation, {
+        profile_id: id,
+        gender: userData.gender,
+      });
     }
 
   }

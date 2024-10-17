@@ -10,6 +10,7 @@ import InputForm, { inputHandle } from '~/app/core/component/InputForm';
 import { showLoading } from '~/app/core/utils/loader';
 import { REGISTER_PATH } from '~/app/service/ApiServices';
 import { Ionicons } from '@expo/vector-icons'; 
+import AppYesNo from '~/app/core/component/AppYesNo';
 
 
 export default function SignUp({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
@@ -20,6 +21,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
     phone: '',
     username: '',
     password: '',
+    gender: false,
   })
 
   const refPhone = useRef<inputHandle>(null);
@@ -32,6 +34,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
       data.phone,
       data.username,
       data.password,
+      data.gender,
     ];
     if (requiredFields.some(field => field === undefined || field === '')) {
       return false;
@@ -54,6 +57,7 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
           fullname: data.name,
           phone: data.phone,
           username: data.username,
+          gender: data.gender ? 'pria' : 'wanita',
           password: data.password,
           password_confirmation: data.password,
         }
@@ -94,6 +98,13 @@ export default function SignUp({ navigation }: { navigation: CompositeNavigation
               value={data.name}
               onChangeText={(value) => setData({ ...data, name: value })}
               style={styles.form}
+            />
+            <AppText style={styles.label}>Jenis Kelamin</AppText>
+            <AppYesNo
+              value={data.gender}
+              onValueChange={(value) => setData({ ...data, gender: value })}
+              style={styles.checkbox}
+              customLabel={{ yes: 'Pria', no: 'Wanita' }}
             />
             <AppText style={styles.label}>No HP</AppText>
             <InputForm
@@ -188,5 +199,8 @@ const styles = StyleSheet.create({
   },
   footer: {
     bottom: 0,
+  },
+  checkbox: {
+    marginBottom: 10,
   },
 });

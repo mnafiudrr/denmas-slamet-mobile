@@ -70,7 +70,7 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
 
   const toggleCekKesehatan = () => {
     if (!userData.is_admin)
-      return HealthyScreen.FORM_PREGNANCY.navigate(navigation, { profile_id: userData.profile_id });
+      return HealthyScreen.FORM_PREGNANCY.navigate(navigation, { profile_id: userData.profile_id, gender: userData.gender });
     return HistoryScreen.LIST_USER.navigate(navigation, { access_type: 'healthy'});
   }
 

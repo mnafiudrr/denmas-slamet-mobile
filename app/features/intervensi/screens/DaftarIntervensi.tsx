@@ -88,9 +88,6 @@ export default function DaftarIntervensi({
                     flex: 1,
                   }}
                 >
-                  <AppText style={{ fontSize: 12, color: "#999" }}>
-                    {`#${intervensi.key}`}
-                  </AppText>
                   <AppText style={{ fontSize: 14, flex: 1 }}>
                     {intervensi.title}
                   </AppText>

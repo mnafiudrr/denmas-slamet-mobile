@@ -15,7 +15,7 @@ export default function AppButton({children, onPress, style, textStyle,
   imageBg = require("~/assets/images/bg-main.png")}: AppButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-      <ImageBackground source={imageBg} imageStyle={{ borderRadius: 25 }}>
+      <ImageBackground source={imageBg} imageStyle={{ borderRadius: 12 }}>
         <AppText bold style={[styles.text, textStyle]}>
           {children}
         </AppText>

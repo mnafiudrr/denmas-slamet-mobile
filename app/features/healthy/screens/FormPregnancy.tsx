@@ -17,7 +17,7 @@ type Props = {
 export default function FormPregnancy({ route }: Props) {
 
   const navigation = useNavigation<CompositeNavigationProp<any, any>>();
-  const { profile_id } = route.params;
+  const { profile_id, gender } = route.params;
 
   type dataTypes = {
     hamil: boolean | undefined,
@@ -31,7 +31,7 @@ export default function FormPregnancy({ route }: Props) {
   }
 
   const [data, setData] = useState<dataTypes>({
-    hamil: undefined,
+    hamil: false,
     usia_kehamilan: '',
     muntah: undefined,
     janin_pasif: undefined,
@@ -91,7 +91,10 @@ export default function FormPregnancy({ route }: Props) {
             <AppText style={styles.label}>Apakah anda sedang hamil?</AppText>
             <AppYesNo
               value={data.hamil}
-              onValueChange={(value) => setData({ ...data, hamil: value })}
+              onValueChange={(value) => {
+                if (gender != 'pria')
+                  setData({ ...data, hamil: value });
+              }}
               style={styles.checkbox}
             />
             <Visible visible={!!data.hamil}>
