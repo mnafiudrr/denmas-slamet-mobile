@@ -23,6 +23,7 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
   type dataTypes = {
     id: string,
     fullname: string,
+    gender: string,
   }
 
   const [data, setData] = useState<dataTypes[]>([]);
@@ -49,26 +50,25 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
         return { 
           id: item.id,
           fullname: item.fullname,
+          gender: item.gender,
           birthday: formatDate(item.birthday) 
         };
       });
 
-      setData(response);
-      
     } catch (error) {
       
     }
     showLoading(false);
   }
 
-  const selectResult = async (id: string) => {
-
+  const selectResult = async (id: string, gender: string) => {
+    
     if (access_type === 'history') {
       HistoryScreen.HISTORY.navigate(navigation, { profile_id: id });
     } else if (access_type === 'healthy') {
       HealthyScreen.FORM_PREGNANCY.navigate(navigation, {
         profile_id: id,
-        gender: userData.gender,
+        gender: gender,
       });
     }
 
@@ -82,7 +82,7 @@ export default function ListUser({ navigation, route }: { navigation: CompositeN
             <AppText style={styles.title} bold>Daftar Pengguna</AppText>
             {
               data.map((item, index) => (
-                <Pressable key={index} style={styles.warpForm} onPress={() => selectResult(item.id)}>
+                <Pressable key={index} style={styles.warpForm} onPress={() => selectResult(item.id, item.gender)}>
                   <AppText style={styles.value} bold>{item.fullname}</AppText>
                 </Pressable>
               ))
