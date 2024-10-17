@@ -12,6 +12,7 @@ import InputForm from '~/app/core/component/InputForm';
 import AppButton from '~/app/core/component/AppButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Alert } from 'react-native';
+import AppYesNo from '~/app/core/component/AppYesNo';
 
 export default function Profile({ navigation }: { navigation: CompositeNavigationProp<any, any> }) {
 
@@ -20,6 +21,7 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
     address: string,
     birthplace: string,
     birthday: string,
+    gender: string,
     riwayat_kesehatan_dahulu: string,
     riwayat_kesehatan_keluarga: string,
   }
@@ -29,6 +31,7 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
     address: '', 
     birthplace: '', 
     birthday: '',
+    gender: '',
     riwayat_kesehatan_dahulu: '',
     riwayat_kesehatan_keluarga: '',
   });
@@ -59,6 +62,7 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
         address: response.address,
         birthplace: response.birthplace,
         birthday: formatDate(response.birthday),
+        gender: response.gender,
         riwayat_kesehatan_dahulu: response.riwayat_kesehatan_dahulu,
         riwayat_kesehatan_keluarga: response.riwayat_kesehatan_keluarga,
       });
@@ -117,7 +121,11 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
         data
       });
 
-      setUserData({...userData, fullname: data.fullname});
+      setUserData({
+        ...userData,
+        fullname: data.fullname,
+        gender: data.gender,
+      });
       
       Alert.alert(
         'Berhasil',
@@ -154,6 +162,13 @@ export default function Profile({ navigation }: { navigation: CompositeNavigatio
                 onChangeText={(text: string) =>
                   setData({ ...data, fullname: text })
                 }
+              />
+              <AppText style={styles.label}>Jenis Kelamin</AppText>
+              <AppYesNo
+                value={data.gender == 'pria'}
+                onValueChange={(value) => setData({ ...data, gender: value ? 'pria' : 'wanita' })}
+                style={styles.checkbox}
+                customLabel={{ yes: "Pria", no: "Wanita" }}
               />
               <AppText style={styles.label}>Alamat</AppText>
               <InputForm
@@ -284,6 +299,9 @@ const styles = StyleSheet.create({
     color: "#29B6F6",
   },
   form: {
+    marginBottom: 10,
+  },
+  checkbox: {
     marginBottom: 10,
   },
 });

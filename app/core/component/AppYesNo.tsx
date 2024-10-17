@@ -19,22 +19,22 @@ export default function AppYesNo({value, onValueChange, style, customLabel}: App
     <View style={[styles.container, style]}>
       <Pressable style={styles.inputContainer}>
         <Checkbox
-                style={styles.checkbox}
-                value={value}
-                onValueChange={onValueChange}
-                color={value ? '#29B6F6' : undefined}
-              />
+          style={styles.checkbox}
+          value={value}
+          onValueChange={onValueChange}
+          color={value ? '#29B6F6' : undefined}
+        />
         <AppText style={styles.label}>
           {customLabel?.yes || 'Ya'}
         </AppText>
       </Pressable>
       <Pressable style={styles.inputContainer}>
         <Checkbox
-                style={styles.checkbox}
-                value={value === false}
-                onValueChange={(value) => onValueChange && onValueChange(!value)}
-                color={value === false ? '#29B6F6' : undefined}
-              />
+          style={styles.checkbox}
+          value={value === false}
+          onValueChange={(value) => onValueChange && onValueChange(!value)}
+          color={value === false ? '#29B6F6' : undefined}
+        />
         <AppText style={styles.label}>
           {customLabel?.no || 'Tidak'}
         </AppText>
