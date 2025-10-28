@@ -16,7 +16,7 @@ import { showLoading } from '~/app/core/utils/loader';
 import ProfileScreen from '../../profile/config/Screens';
 import PrinsipScreen from '../../prinsip/config/Screens';
 import FaqScreen from '../../faq/config/Screens';
-// import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import IntervensiScreen from '../../intervensi/config/Screens';
 import AppButtonCustom from '~/app/core/component/AppButtonCustom';
 
@@ -154,14 +154,14 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         style={styles.bottomNavigationBar}
       >
         <Pressable style={styles.bottomNavButton} onPress={toggleCekKesehatan}>
-          {/* <Stethoscope width={26} height={26} color="white" /> */}
+          <MaterialCommunityIcons name="stethoscope" size={28} color="white" />
           <AppText style={styles.bottomNavText}>Periksa</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={togglePeriksaStatusGizi}
         >
-          {/* <ClinicalFe width={26} height={26} color="white" /> */}
+          <MaterialCommunityIcons name="food" size={28} color="white" />
           <AppText style={styles.bottomNavText}>Status Gizi</AppText>
         </Pressable>
         <Pressable
@@ -170,14 +170,14 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
             IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)
           }
         >
-          {/* <CriticalCare width={26} height={26} color="white" /> */}
+          <MaterialCommunityIcons name="medical-bag" size={28} color="white" />
           <AppText style={styles.bottomNavText}>Intervensi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={() => FaqScreen.FAQ.navigate(navigation)}
         >
-          {/* <Forum width={26} height={26} color="white" /> */}
+          <MaterialCommunityIcons name="frequently-asked-questions" size={28} color="white" />
           <AppText style={styles.bottomNavText}>FAQ</AppText>
         </Pressable>
       </ImageBackground>
