@@ -1,11 +1,16 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "./node_modules/expo/tsconfig.base",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
     "strict": true,
-    "baseUrl": "./", // all paths are relative to the baseUrl
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
-    }
+      "~/*": ["*"]
+    },
+    "types": ["react", "react-native"]
   }
 }

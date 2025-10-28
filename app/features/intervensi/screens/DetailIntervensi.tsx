@@ -1,6 +1,7 @@
+import * as React from "react";
 import { CompositeNavigationProp } from "@react-navigation/native";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import AppText from "~/app/core/component/AppText";
 import AppView from "~/app/core/component/AppView";
@@ -8,6 +9,7 @@ import HtmlContent from "~/app/core/component/HtmlContent";
 import { AuthContext } from "~/app/core/config/AuthContext";
 import { showLoading } from "~/app/core/utils/loader";
 import { GET_INTERVENSI } from "~/app/service/ApiServices";
+import RichHtmlContent from "~/app/core/component/RichHtmlContent";
 
 type Props = {
   navigation: CompositeNavigationProp<any, any>;
@@ -56,7 +58,8 @@ export default function DetailIntervensi({
             <AppText style={styles.title} bold>
               {title}
             </AppText>
-            <HtmlContent html={content} />
+            {/* <HtmlContent html={content} /> */}
+            <RichHtmlContent html={content} />
           </View>
         </View>
       </ScrollView>

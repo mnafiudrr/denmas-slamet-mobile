@@ -1,5 +1,6 @@
+import * as React from 'react';
 import { View, Alert, StyleSheet, Image, BackHandler, Pressable, TouchableOpacity, ImageBackground } from 'react-native';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import AppView from '~/app/core/component/AppView';
 import { CompositeNavigationProp, useFocusEffect } from '@react-navigation/native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'; 
@@ -15,7 +16,7 @@ import { showLoading } from '~/app/core/utils/loader';
 import ProfileScreen from '../../profile/config/Screens';
 import PrinsipScreen from '../../prinsip/config/Screens';
 import FaqScreen from '../../faq/config/Screens';
-import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
+// import { ClinicalFe, CriticalCare, Forum, Stethoscope } from 'healthicons-react-native';
 import IntervensiScreen from '../../intervensi/config/Screens';
 import AppButtonCustom from '~/app/core/component/AppButtonCustom';
 
@@ -153,14 +154,14 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
         style={styles.bottomNavigationBar}
       >
         <Pressable style={styles.bottomNavButton} onPress={toggleCekKesehatan}>
-          <Stethoscope width={26} height={26} color="white" />
+          {/* <Stethoscope width={26} height={26} color="white" /> */}
           <AppText style={styles.bottomNavText}>Periksa</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={togglePeriksaStatusGizi}
         >
-          <ClinicalFe width={26} height={26} color="white" />
+          {/* <ClinicalFe width={26} height={26} color="white" /> */}
           <AppText style={styles.bottomNavText}>Status Gizi</AppText>
         </Pressable>
         <Pressable
@@ -169,14 +170,14 @@ export default function Home({ navigation }: { navigation: CompositeNavigationPr
             IntervensiScreen.DAFTAR_INTERVENSI.navigate(navigation)
           }
         >
-          <CriticalCare width={26} height={26} color="white" />
+          {/* <CriticalCare width={26} height={26} color="white" /> */}
           <AppText style={styles.bottomNavText}>Intervensi</AppText>
         </Pressable>
         <Pressable
           style={styles.bottomNavButton}
           onPress={() => FaqScreen.FAQ.navigate(navigation)}
         >
-          <Forum width={26} height={26} color="white" />
+          {/* <Forum width={26} height={26} color="white" /> */}
           <AppText style={styles.bottomNavText}>FAQ</AppText>
         </Pressable>
       </ImageBackground>

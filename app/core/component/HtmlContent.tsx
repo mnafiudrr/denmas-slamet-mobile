@@ -6,6 +6,14 @@ export default function HtmlContent({ html }: { html: string }) {
   return (
     <View style={styles.webviewContainer}>
       <AutoHeightWebView
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={false}
+        mixedContentMode="always"
+        setSupportMultipleWindows={false}
+        allowsFullscreenVideo={true}
+
         automaticallyAdjustContentInsets={false}
         originWhitelist={["*"]}
         source={{
@@ -25,7 +33,7 @@ export default function HtmlContent({ html }: { html: string }) {
             object-fit: contain; 
           }
         `}
-        allowsFullscreenVideo={true}
+        // allowsFullscreenVideo={true}
         style={{ width: Dimensions.get("window").width - 50 }}
         scalesPageToFit={false}
         viewportContent={"width=device-width, user-scalable=no"}
